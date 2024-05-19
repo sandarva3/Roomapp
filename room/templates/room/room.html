@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Room.app</h1>
+    </header>
+    <main>
+        <div class="container">
+            <a href="{% url 'home' %}">
+            <button type="button" class="btn">Back to Homepage</button>
+            </a>
+            <h2>Room</h2>
+            <i style="font-size: small;">This room was created at: {{room.uploaded_at}}</i>
+            <h3>The text in room is:</h3>
+            <button id="copytext">Copy text</button>
+            <pre class="room-text" id="text">{{room.text}}</pre>
+            <p>files: <a href="{{ room.file.url }}">{{room.file.name}}</a></p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Room.app</p>
+    </footer>
+    <script src="{% static 'js/room.js' %}"></script>
+</body>
+</html>
