@@ -1,1 +1,0 @@
-SECURITY KEY = 'django-insecure-vwrp7u%d4=mdfn6sld*%oma$^johlk5x1c+p_&x3ft8!d56a4o'
