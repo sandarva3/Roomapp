@@ -10,5 +10,5 @@ from.views import(
 urlpatterns = [
     path('', home_view, name='home'),
     path('room/', room_view, name='room'),
-    path('text/room/<uuid:uuid>', link_view, name="roomlink"),
+    path('room/<uuid:uuid>', link_view, name="roomlink"),
 ]

@@ -17,11 +17,17 @@
             <button type="button" class="btn">Back to Homepage</button>
             </a>
             <h2>Room</h2>
-            <i style="font-size: small;">This room was created at: {{room.uploaded_at}}</i>
-            <h3>The text in room is:</h3>
+            <i style="font-size: small;">This room was created at: {{room.created_at}}</i>
+            <h3>The text in room:</h3>
             <button id="copytext">Copy text</button>
             <pre class="room-text" id="text">{{room.text}}</pre>
-            <p>files: <a href="{{ room.file.url }}">{{room.file.name}}</a></p>
+            <p><b style="border-bottom: 1px solid black;">Files in the Room:</b>
+                <br>
+                {% for file in files %}
+                <br>
+                <a href="{{ file.file.url }}" style="text-decoration: none;">- {{file.file.name}}</a>
+                {% endfor %}
+            </p>
         </div>
     </main>
     <footer>

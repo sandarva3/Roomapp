@@ -16,7 +16,11 @@
             <form method="post" action="{% url 'home' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <textarea name="text" rows="10" placeholder="Start Typing!" required></textarea>
-                    {{form.as_p}}
+                <input type="file" name="files" id="files" multiple>
+                <br><br>
+                    <strong>Valid for: </strong>{{form.time_choice}}
+                <br>
+                <br>
                 <div class="buttons">
                     <button type="submit" class="btn" id="submitBtn" onclick="submitBtnclick('submitBtn')">Submit</button>
                     <!-- <button type="button" class="btn">Links</button>
@@ -30,7 +34,7 @@
             <h3>Your room link: <p style="font-style: italic;" id="roomlink">{{room_url}}</p></h3>
             <button type="button" class="btn" id="copyUrl">Copy link</button>
             </div>
-            <h2>Enter room code:</h2>
+            <h2>Enter room code/link: </h2>
             <form method="post" action="{% url 'room' %}">
                 {% csrf_token %}
                 <input type="text" name="code" placeholder="Enter room code">

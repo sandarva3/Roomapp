@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'room',
+    'django_apscheduler',
 
     'django.contrib.admin',
     'django.contrib.auth',
