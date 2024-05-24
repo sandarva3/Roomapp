@@ -1,26 +1,53 @@
-import threading
+from django.utils import timezone
+from apscheduler.schedulers.background import BackgroundScheduler
 from .models import Room
 import time
 
 def check_time():
-    try:
-        epoch = time.time()
-        now = int(epoch)
-        rooms = Room.objects.all()
-        for room in rooms:
-            if (now >= room.total_time):
-                print(f"THE ROOM CODE: {room.code}")
-                room.delete()
-                print("ROOM DELETED !")
+    epoch = time.time()
+    now = int(epoch)
+    rooms = Room.objects.all()
+    for room in rooms:
+        if (now >= room.total_time):
+            print(f"ROOM DELETED: {room.code}")
+            room.delete()
+
+def start():
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(check_time, 'interval', minutes=0.2)
+    scheduler.start()
+
+
+
+
+
+
+
+
+
+# import threading
+# from .models import Room
+# import time
+
+# def check_time():
+#     try:
+#         epoch = time.time()
+#         now = int(epoch)
+#         rooms = Room.objects.all()
+#         for room in rooms:
+#             if (now >= room.total_time):
+#                 print(f"THE ROOM CODE: {room.code}")
+#                 room.delete()
+#                 print("ROOM DELETED !")
     
-    except Exception as e:
-        print(f"ERROR OCCURED : {e}")
+#     except Exception as e:
+#         print(f"ERROR OCCURED : {e}")
 
 
-def run():
-    thread = threading.Timer(15, run)
-    thread.start()
-    check_time()
+# def run():
+#     while True:
+#         time.sleep(15)
+#         check_time()
 
 
 

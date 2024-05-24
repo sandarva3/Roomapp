@@ -6,5 +6,5 @@ class RoomConfig(AppConfig):
     name = 'room'
 
     def ready(self):
-        from .cron import run
-        run()
+        from .cron import start
+        start()

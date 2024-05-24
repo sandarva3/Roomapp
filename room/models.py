@@ -14,5 +14,5 @@ class Room(models.Model):
 
 class Files(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='files')
-    file = models.FileField(upload_to='uploads/', null=True, blank=True)
+    file = models.FileField(upload_to='', null=True, blank=True)
     

@@ -17,7 +17,9 @@
             <button type="button" class="btn">Back to Homepage</button>
             </a>
             <h2>Room</h2>
-            <i style="font-size: small;">This room was created at: {{room.created_at}}</i>
+            <i style="font-size: small;">This room was created at: <b>{{room.created_at}}</b></i>
+            <br>
+            <i style="font-size: small;">and would Remain till: <b>{{till_date}}</b></i>
             <h3>The text in room:</h3>
             <button id="copytext">Copy text</button>
             <pre class="room-text" id="text">{{room.text}}</pre>
