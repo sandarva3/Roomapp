@@ -59,6 +59,7 @@ input[type="text"] {
 }
 
 .room-text {
+    white-space: pre-wrap;
     font-size: 18px;
     padding: 10px;
     border: 1px solid #ccc;

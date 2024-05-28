@@ -14,7 +14,7 @@ def check_time():
 
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(check_time, 'interval', minutes=0.2)
+    scheduler.add_job(check_time, 'interval', minutes=1)
     scheduler.start()
 
 

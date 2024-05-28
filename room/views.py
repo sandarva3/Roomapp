@@ -6,6 +6,26 @@ import time
 import threading
 import datetime
 import pytz
+from django.http import JsonResponse
+import json
+
+
+def ajax_view(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        fileid = data['code']
+        file = Files.objects.get(id=fileid)
+        fileurl = request.build_absolute_uri(file.file.url)
+        print(f"Data Received: {data['data']}")
+
+        context = {
+            'response': 'Data received successfully',
+            'filename':file.file.name,
+            'file':fileurl
+        }
+        return JsonResponse(context)
+    else:
+        return JsonResponse({'error':'Data not received'}, status=400)
 
 
 def home_view(request):
