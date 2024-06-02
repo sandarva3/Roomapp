@@ -17,6 +17,8 @@ def ajax_view(request):
         file = Files.objects.get(id=fileid)
         fileurl = request.build_absolute_uri(file.file.url)
         print(f"Data Received: {data['data']}")
+        print(f"FILEID: {fileid}")
+        print(f"File URL: {fileurl}")
 
         context = {
             'response': 'Data received successfully',

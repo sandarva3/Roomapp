@@ -15,6 +15,14 @@
             text-decoration: underline;
         }
     </style>
+
+    <script>
+        let fileids = []
+        "{% for file in files %}"
+        fileids.push('{{ file.id }}')
+        "{% endfor %}"
+        console.log('FILE IDS ARRAY: ', fileids);
+    </script>
 </head>
 <body>
     <header>
@@ -34,9 +42,11 @@
             <pre class="room-text" id="text">{{room.text}}</pre>
             <p><b style="border-bottom: 1px solid black;">Files in the Room:</b>
                 <br>
+                <button type="submit" class="Alldownload" onclick="allFile(fileids)">Download all files</button>
+                <br>
                 {% for file in files %}
                 <br>
-                <a href="{{ file.file.url }}" class="files" onclick="sendReq('{{file.id}}')">- {{file.file.name}}</a>
+                <a href="#" class="files" onclick="sendReq('{{file.id}}')">- {{file.file.name}}</a>
                 {% endfor %}
             </p>
         </div>

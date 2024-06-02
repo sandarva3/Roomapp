@@ -5,6 +5,20 @@ body {
     padding: 0;
 }
 
+.Alldownload{
+    margin-top: 10px;
+    background-color: rgb(204, 105, 105);
+    border: 0px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.Alldownload:hover{
+    background-color:  rgb(170, 84, 84);
+}
+
 header {
     background-color: #333;
     color: white;
