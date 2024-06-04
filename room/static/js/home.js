@@ -34,3 +34,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
 //     box.style.display = "block";
 //     console.log("The function has been triggered.");
 // }
+
+let fileinput = document.getElementById('fileinput');
+fileinput.addEventListener('change', function(event){
+    console.log("TRIGGERED");
+    let area = document.getElementById('area');
+    let files = event.target.files;
+    area.textContent = '';
+    for(let i=0; i<(files.length); i++){
+        
+        let filename = document.createElement('p');
+        filename.textContent ='- ' + files[i].name;
+        filename.style.color = 'gray';
+        filename.style.margin = '0px';
+        area.appendChild(filename);
+        
+    }
+} )

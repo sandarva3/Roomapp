@@ -1,0 +1,49 @@
+{% extends "room/base.html" %}
+{% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Sharing Interface</title>
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <style>
+    button {
+        background-color: #cd7c7c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 4px 8px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+    button:hover {
+        background-color: rgb(158, 84, 84)c7c;
+    }
+    </style>
+    {% endblock css %}
+
+    {% block js %}
+    <script src="{% static 'js/locale.js' %}"></script>
+    {% endblock js %}
+    {% block content %}
+    <p style="margin-left: 50px;">
+        <a href="{% url 'home' %}">Go to home</a>
+    </p>
+    <main>
+        <div class="container">
+                {% csrf_token %}
+                <textarea name="text" rows="10" placeholder="Start Typing!" required></textarea>
+                <input type="file" name="files" id="fileinput" multiple>
+                <div id="area">
+                </div>
+                <br>
+                <div class="buttons">
+                    <button id="copyBtn">Copy</button>
+                </div>
+                <div class="buttons">
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+        </div>
+    </main>
+    {% endblock content %}

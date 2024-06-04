@@ -1,65 +1,51 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room</title>
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% extends "room/base.html" %}
 
-    <style>
-        .files{
-            text-decoration: none;
-        }
-        .files:hover{
-            text-decoration: underline;
-        }
-    </style>
-
-    <script>
-        let fileids = []
-        "{% for file in files %}"
-        fileids.push('{{ file.id }}')
-        "{% endfor %}"
-        console.log('FILE IDS ARRAY: ', fileids);
-    </script>
-</head>
-<body>
-    <header>
-        <h1>Room.app</h1>
-    </header>
-    <main>
-        <div class="container">
-            <a href="{% url 'home' %}">
-            <button type="button" class="btn">Back to Homepage</button>
-            </a>
-            <h2>Room</h2>
-            <i style="font-size: small;">This room was created at: <b>{{room.created_at}}</b></i>
+{% block css %}
+<style>
+    .files{
+        text-decoration: none;
+    }
+    .files:hover{
+        text-decoration: underline;
+    }
+</style>
+{% endblock css %}
+    
+{% block js %}
+<script>
+    let fileids = []
+    "{% for file in files %}"
+    fileids.push('{{ file.id }}')
+    "{% endfor %}"
+    console.log('FILE IDS ARRAY: ', fileids);
+</script>
+{% endblock js %}
+    
+{% block content %}
+<p style="margin-left: 50px;">
+    <a href="{% url 'lan' %}">Go to Locale</a>
+</p>
+<main>
+    <div class="container">
+        <a href="{% url 'home' %}">
+        <button type="button" class="btn">Back to Homepage</button>
+        </a>
+        <h2>Room</h2>
+        <i style="font-size: small;">This room was created at: <b>{{room.created_at}}</b></i>
+        <br>
+        <i style="font-size: small;">and would remain till: <b>{{till_date}}</b></i>
+        <h3>The text in room:</h3>
+        <button id="copytext">Copy text</button>
+        <pre class="room-text" id="text">{{room.text}}</pre>
+        <p><b style="border-bottom: 1px solid black;">Files in the Room:</b>
             <br>
-            <i style="font-size: small;">and would remain till: <b>{{till_date}}</b></i>
-            <h3>The text in room:</h3>
-            <button id="copytext">Copy text</button>
-            <pre class="room-text" id="text">{{room.text}}</pre>
-            <p><b style="border-bottom: 1px solid black;">Files in the Room:</b>
-                <br>
-                <button type="submit" class="Alldownload" onclick="allFile(fileids)">Download all files</button>
-                <br>
-                {% for file in files %}
-                <br>
-                <a href="#" class="files" onclick="sendReq('{{file.id}}')">- {{file.file.name}}</a>
-                {% endfor %}
-            </p>
-        </div>
-    </main>
-    <footer>
-        <p>&copy; 2024 Room.app</p>
-    </footer>
-    <p id="jsonresponse"></p>
-    <script>
-        const ajaxUrl = "{% url 'sendajax' %}";
-        const csrf = "{{ csrf_token }}";
-    </script>
-    <script src="{% static 'js/room.js' %}"></script>
-    <script src="{% static 'js/get.js' %}"></script>
-</body>
-</html>
+            <button type="submit" class="Alldownload" onclick="allFile(fileids)">Download all files</button>
+            <br>
+            {% for file in files %}
+            <br>
+            <a href="#" class="files" onclick="sendReq('{{file.id}}')">- {{file.file.name}}</a>
+            {% endfor %}
+        </p>
+    </div>
+</main>
+{% endblock content %}
