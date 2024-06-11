@@ -20,20 +20,48 @@
     button:hover {
         background-color: rgb(158, 84, 84)c7c;
     }
+    /* #done{
+        visibility: hidden;
+    }
+    #loading{
+        visibility: hidden;
+    } */
     </style>
     {% endblock css %}
 
-    {% block js %}
+    {% block jstop %}
+    <script>
+        const ip_url = "{% url 'async' %}";
+        const csrf = "{{ csrf_token }}";
+        const latest = "{{ latest|escapejs }}";
+</script>
+
     <script src="{% static 'js/locale.js' %}"></script>
-    {% endblock js %}
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById('textinput').value = latest;
+        });
+        const loading = document.getElementById('loading');
+        const done = document.getElementById('done');
+        loading.style.display = "none";
+        done.style.display = "none";
+
+    </script>
+    
+    {% endblock jstop %}
+
     {% block content %}
     <p style="margin-left: 50px;">
         <a href="{% url 'home' %}">Go to home</a>
     </p>
     <main>
+        
         <div class="container">
-                {% csrf_token %}
-                <textarea name="text" rows="10" placeholder="Start Typing!" required></textarea>
+            <img src="{% static 'img/reloading.gif' %}" width="30px" alt="loading" id="loading">
+            <img src="{% static 'img/done.png' %}" width="35x" alt="done" id="done">
+
+                <textarea name="text" rows="15" placeholder="Start Typing!" id="textinput" required></textarea>
                 <input type="file" name="files" id="fileinput" multiple>
                 <div id="area">
                 </div>
@@ -45,5 +73,6 @@
                     <button type="submit" class="btn">Submit</button>
                 </div>
         </div>
+        
     </main>
     {% endblock content %}

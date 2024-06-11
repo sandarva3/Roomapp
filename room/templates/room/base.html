@@ -9,8 +9,9 @@
     {% block css %}
     {% endblock css %}
 
-    {% block js %}
-    {% endblock js %}
+    {% block jstop %}
+    {% endblock jstop %}
+
 </head>
 <body>
     <header>
@@ -23,5 +24,7 @@
     </footer>
 
     <script src="{% static 'js/home.js' %}"></script>
+    {% block js %}
+    {% endblock js %}
 </body>
 </html>
