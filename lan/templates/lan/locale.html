@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Sharing Interface</title>
     {% block css %}
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'roomcss/home.css' %}">
     <style>
     button {
         background-color: #cd7c7c;
@@ -26,6 +26,15 @@
     #loading{
         visibility: hidden;
     } */
+     main{
+        width: 100%;
+     }
+     
+     .delfile{
+        text-decoration: underline;
+        color: red;
+     }
+
     </style>
     {% endblock css %}
 
@@ -36,7 +45,7 @@
         const latest = "{{ latest|escapejs }}";
 </script>
 
-    <script src="{% static 'js/locale.js' %}"></script>
+    <script src="{% static 'lanjs/locale.js' %}"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -58,10 +67,10 @@
     <main>
         
         <div class="container">
-            <img src="{% static 'img/reloading.gif' %}" width="30px" alt="loading" id="loading">
-            <img src="{% static 'img/done.png' %}" width="35x" alt="done" id="done">
+            <img src="{% static 'lanimg/reloading.gif' %}" width="30px" alt="loading" id="loading">
+            <img src="{% static 'lanimg/done.png' %}" width="35x" alt="done" id="done">
 
-                <textarea name="text" rows="15" placeholder="Start Typing!" id="textinput" required></textarea>
+                <textarea name="text" rows="20" placeholder="Start Typing!" id="textinput" required></textarea>
             <form method="post" enctype="multipart/form-data" action="{% url 'lanfiles' %}">
                 {% csrf_token %}
                 <input type="file" name="lanfile" id="fileinput" multiple>
@@ -69,7 +78,7 @@
                 </div>
                 <div id="lanfiles">
                     {% for file in files %}
-                    - {{file}}
+                    - {{file}} <a class="delfile" href="{% url 'delfile' file.id %}" title="delete this file">&#10006;</a>
                     <br>
                     {% endfor %}
                 </div>

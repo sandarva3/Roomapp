@@ -1,4 +1,5 @@
 {% extends "room/base.html" %}
+{% load static %}
 
 {% block css %}
 <style>
@@ -11,15 +12,23 @@
 </style>
 {% endblock css %}
     
-{% block js %}
+{% block jstop %}
 <script>
     let fileids = []
     "{% for file in files %}"
     fileids.push('{{ file.id }}')
     "{% endfor %}"
     console.log('FILE IDS ARRAY: ', fileids);
+    const ajaxUrl = "{% url 'sendajax' %}";
+    const csrf = "{{ csrf_token }}";
 </script>
+{% endblock jstop %}
+
+{% block js %}
+<script src="{% static 'roomjs/get.js' %}"></script>
+<script src="{% static 'roomjs/room.js' %}"></script>
 {% endblock js %}
+
     
 {% block content %}
 <p style="margin-left: 50px;">

@@ -96,6 +96,8 @@ def room_view(request):
                 print(f"The code is: {code}")
                 room = Room.objects.get(code=code)
                 files = room.files.all()
+                print(f"ROOM FOUND: {room}")
+                print(f"FILES IN ROOM: {files}")
                 till_date = datetime.datetime.fromtimestamp(room.total_time, tz=pytz.utc)
 
             context = {
@@ -104,8 +106,11 @@ def room_view(request):
                 'till_date': timezone.localtime(till_date),
             }
             return render(request, 'room/room.html', context)
-        except:
+        except Exception as e:
+            print(f"THE ERROR IS : {e}")
             return HttpResponse("The room you're trying to access could've been already vanished. OR Please make sure your code/link is Valid.", status=404)
+    else:
+        return HttpResponse("SOMETHING WENT WRONG. TRY AGAIN.")
         
 
 def link_view(request, uuid):

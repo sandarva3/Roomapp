@@ -4,6 +4,12 @@ import json
 from .models import Text, Lanfiles
 
 
+def delFile_view(request, id):
+    file = Lanfiles.objects.get(id=id)
+    file.delete()
+    return redirect('lan')
+
+
 def files_view(request):
     if request.method == "POST":
         files = request.FILES.getlist('lanfile')
@@ -11,6 +17,7 @@ def files_view(request):
             Lanfiles.objects.create(file=f)
             print(f"FILE: {f}")
         return redirect('lan')
+
 
 def async_view(request):
     if request.method == "POST":
@@ -45,13 +52,14 @@ def async_view(request):
              status = 400
         )
 
+
 def lan_view(request):
     try:
         files = Lanfiles.objects.all()
         latest = Text.objects.latest('created_at')
         # print(f'The latest text: {latest.texts}')
         context = {
-            'files':files,
+            'files': files,
             'latest': latest.texts,
         }
         return render(request, 'lan/locale.html', context)
