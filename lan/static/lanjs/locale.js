@@ -10,8 +10,26 @@ document.addEventListener("DOMContentLoaded", ()=> {
     const textValue = textInput.value;
     checkIP(textValue)
 })
-// console.log('value = ', hello);
+
+let copytext = document.getElementById('copyBtn');
+    copytext.addEventListener("click", () => {
+    const link = document.getElementById('textinput').value;
+    navigator.clipboard.writeText(link).then(() => {
+        copytext.textContent = "text copied!";
+        setTimeout(() =>{
+            copytext.textContent = "Copy text";
+        }, 3000);
+    }).catch(err => {
+        console.error('Failed to copy link: ', err);
+    });
+});
+
+document.getElementById('fileupload').addEventListener('submit', ()=>{
+    getIP();
 })
+
+
+});
 
 // document.addEventListener('DOMContentLoaded', ()=> {
 //     getLocalIP(function(ip){
@@ -40,6 +58,33 @@ document.addEventListener("DOMContentLoaded", ()=> {
 //         // console.log(data.latest);
 //     })
 // }
+
+
+/*   function getIP(){
+    
+    fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => {
+        fileIP(data.ip);
+    })
+    .catch(error => {
+        console.log('Error:', error);
+    });
+}
+
+  function fileIP(ipaddress){
+    fetch(fileURL, {
+        method : "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrf,
+        },
+        body: JSON.stringify({
+            'ipaddress':ipaddress,
+        })
+    });
+    console.log("FILE IP IS SENT. IP:", ipaddress);
+};  */
 
 
 

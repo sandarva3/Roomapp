@@ -1,10 +1,14 @@
 {% extends "room/base.html" %}
-
+{% load static %}
 {% block content %}
 
 <p style="margin-left: 50px;">
     <a href="{% url 'lan' %}">Go to Locale</a>
 </p>
+{% block js %}
+<script src="{% static 'roomjs/get.js' %}"></script>
+<script src="{% static 'roomjs/room.js' %}"></script>
+{% endblock js %}
 <main>
     <div class="container">
         <form method="post" action="{% url 'home' %}" enctype="multipart/form-data">

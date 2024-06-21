@@ -1,11 +1,5 @@
 import time
 
-def display():
-    print("HELLO")
-
-def run():
-    while True:
-        display()
-        time.sleep(5)
-
-run()
+def del_files():
+    now = time.time()
+    print(f"The current time: {now}")

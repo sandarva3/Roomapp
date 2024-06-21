@@ -4,6 +4,7 @@ from .views import(
     async_view,
     files_view,
     delFile_view,
+    lanAjax_view,
 )
 
 urlpatterns = [
@@ -11,4 +12,5 @@ urlpatterns = [
     path('async/', async_view, name='async'),
     path('files/', files_view, name='lanfiles'),
     path('del/<int:id>', delFile_view, name='delfile'),
+    path('lanEndpoint', lanAjax_view, name='lanAjax')
 ]

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{% static 'roomcss/home.css' %}">
     <style>
     button {
-        background-color: #cd7c7c;
+        background-color: rgb(77, 77, 196);
         color: white;
         border: none;
         border-radius: 5px;
@@ -18,7 +18,7 @@
     }
 
     button:hover {
-        background-color: rgb(158, 84, 84)c7c;
+        background-color: rgb(83, 83, 232);
     }
     /* #done{
         visibility: hidden;
@@ -26,15 +26,23 @@
     #loading{
         visibility: hidden;
     } */
-     main{
-        width: 100%;
-     }
-     
-     .delfile{
+    main{
+       width: 100%;
+    }
+    
+    .delfile{
+       text-decoration: underline;
+       color: red;
+    }
+    .eachfile{
+       text-decoration: none;
+       color: black;
+       cursor: pointer;
+    }
+    .eachfile:hover{
         text-decoration: underline;
-        color: red;
-     }
-
+    }
+    
     </style>
     {% endblock css %}
 
@@ -42,10 +50,18 @@
     <script>
         const ip_url = "{% url 'async' %}";
         const csrf = "{{ csrf_token }}";
+        const lanAjaxUrl = "{% url 'lanAjax' %}";
         const latest = "{{ latest|escapejs }}";
-</script>
+        const fileURL = "{% url 'lanfiles' %}";
+        let fileids = []
+        "{% for file in files %}"
+        fileids.push('{{ file.id }}');
+        "{% endfor %}"
+        console.log('FILE IDS ARRAY: ', fileids);
+    </script>
 
     <script src="{% static 'lanjs/locale.js' %}"></script>
+    <script src="{% static 'lanjs/getlan.js' %}"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -69,27 +85,30 @@
         <div class="container">
             <img src="{% static 'lanimg/reloading.gif' %}" width="30px" alt="loading" id="loading">
             <img src="{% static 'lanimg/done.png' %}" width="35x" alt="done" id="done">
-
-                <textarea name="text" rows="20" placeholder="Start Typing!" id="textinput" required></textarea>
+            
+                <button id="copyBtn">Copy text</button>
+            <textarea name="text" rows="20" placeholder="Start Typing!" id="textinput" required></textarea>
             <form method="post" enctype="multipart/form-data" action="{% url 'lanfiles' %}">
                 {% csrf_token %}
                 <input type="file" name="lanfile" id="fileinput" multiple>
                 <div id="area">
                 </div>
+                <hr>
+                <button type="submit" class="Alldownload" onclick="allFile(fileids)">Download all files</button>
+
                 <div id="lanfiles">
                     {% for file in files %}
-                    - {{file}} <a class="delfile" href="{% url 'delfile' file.id %}" title="delete this file">&#10006;</a>
+                    <a class="eachfile" href="#" onclick="sendReq('{{file.id}}')">
+                        - {{ file.name }} | 
+                    </a> 
+                    <a class="delfile" href="{% url 'delfile' file.id %}" title="delete this file">&#10006;</a>
                     <br>
                     {% endfor %}
                 </div>
                 <div class="buttons">
-                    <button type="submit" style="padding: 3px;" class="btn">Upload files</button>
+                    <button type="submit" id="fileupload" style="padding: 3px;" class="btn">Upload files</button>
                 </div>
             </form>
-                <br>
-                <div class="buttons">
-                    <button id="copyBtn">Copy</button>
-                </div>
         </div>
         
     </main>

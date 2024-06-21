@@ -3,7 +3,6 @@ from .models import Room, Files
 from django.utils import timezone
 from .forms import TimeForm
 import time
-import threading
 import datetime
 import pytz
 from django.http import JsonResponse
