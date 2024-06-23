@@ -3,18 +3,32 @@ document.addEventListener("DOMContentLoaded", ()=> {
     const done = document.getElementById('done');
     loading.style.display = "none";
     done.style.display = "none";
+    form3 = document.getElementById('form3');
+    console.log("FORM 3");
+
+    //WHEN CHANGES ARE MADE IN TEXTAREA
     let textInput = document.getElementById('textinput');
     textInput.addEventListener("input", function(){
         done.style.display = "none";
         loading.style.display = "block";
     const textValue = textInput.value;
-    checkIP(textValue)
-})
+    checkIP(textValue);
 
-let copytext = document.getElementById('copyBtn');
+});
+
+    form3.addEventListener('submit', function(event){
+    event.preventDefault();
+    getIP();
+    setTimeout(() => {
+        this.submit();
+    }, (500));
+});
+
+// COPY THE TEXT OF TEXTAREA
+    let copytext = document.getElementById('copyBtn');
     copytext.addEventListener("click", () => {
-    const link = document.getElementById('textinput').value;
-    navigator.clipboard.writeText(link).then(() => {
+    const texts = document.getElementById('textinput').value;
+    navigator.clipboard.writeText(texts).then(() => {
         copytext.textContent = "text copied!";
         setTimeout(() =>{
             copytext.textContent = "Copy text";
@@ -24,83 +38,50 @@ let copytext = document.getElementById('copyBtn');
     });
 });
 
-document.getElementById('fileupload').addEventListener('submit', ()=>{
-    getIP();
-})
 
 
 });
-
-// document.addEventListener('DOMContentLoaded', ()=> {
-//     getLocalIP(function(ip){
-//         sendLocalIP(ip);
-//     }) 
-// })
-
-// function sendLocalIP(address, text){
-//     fetch(ip_url, {
-//         method : "POST",
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'X-CSRFToken': csrf,
-//         },
-//         body: JSON.stringify({
-//             'data':"Here I'm trying to send IP address",
-//             'ip':address,
-//             'text':text,
-//         })
-//     })
-//     .then( response => response.json() )
-//     .then(data => {
-//         // console.log(data.reply);
-//         // console.log(data.network);
-//         // console.log(data.device);
-//         // console.log(data.latest);
-//     })
-// }
-
-
-/*   function getIP(){
     
+
+function getIP(){
     fetch('https://api.ipify.org?format=json')
     .then(response => response.json())
     .then(data => {
-        fileIP(data.ip);
+        document.getElementById('addr').value = data.ip;
     })
     .catch(error => {
         console.log('Error:', error);
     });
-}
-
-  function fileIP(ipaddress){
-    fetch(fileURL, {
-        method : "POST",
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrf,
-        },
-        body: JSON.stringify({
-            'ipaddress':ipaddress,
-        })
-    });
-    console.log("FILE IP IS SENT. IP:", ipaddress);
-};  */
+};
 
 
+//GET THE PUBLIC IP ADDRESS
 
-function checkIP(text){
+/* async function checkIP(){
+    try{
+        let response = await fetch('https://api.ipify.org?format=json');
+        let data = await response.json();
+        let thisAddress = data.ip;
+        return thisAddress;
+    }
+    catch(error){
+        console.error("THE ERROR: ", error);
+    }
     
+} */
+
+ function checkIP(text){
     fetch('https://api.ipify.org?format=json')
     .then(response => response.json())
     .then(data => {
-        // console.log("THE TEXT: ", text);
         sendIP(data.ip, text);
     })
     .catch(error => {
         console.log('Error:', error);
     });
-}
+};
 
+//SEND TEXT AND IP TO SERVER
 function sendIP(address, text){
     fetch(ip_url, {
         method : "POST",
@@ -116,7 +97,6 @@ function sendIP(address, text){
     })
     .then( response => response.json() )
     .then(data => {
-        console.log("HELO");
         document.getElementById('loading').style.display = "none";
         document.getElementById('done').style.display = "block";
         // console.log(data.reply);
@@ -125,30 +105,3 @@ function sendIP(address, text){
         // console.log(data.latest);
     })
 }
-
-
-// function getLocalIP(callback) {
-//     var RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
-//     if (!RTCPeerConnection) {
-//         return false;
-//     }
-
-//     var rtc = new RTCPeerConnection({iceServers: []});
-//     rtc.createDataChannel('', {reliable: false});
-
-//     rtc.onicecandidate = function (evt) {
-//         if (evt.candidate) {
-//             var ip = /([0-9]{1,3}(\.[0-9]{1,3}){3})/.exec(evt.candidate.candidate)[1];
-//             callback(ip);
-//             rtc.onicecandidate = null;
-//         }
-//     };
-
-//     rtc.createOffer().then(function (offerDesc) {
-//         rtc.setLocalDescription(offerDesc);
-//     }).catch(function (e) {
-//         console.warn("Offer failed: ", e);
-//     });
-
-//     return true;
-// }

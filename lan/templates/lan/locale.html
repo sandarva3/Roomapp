@@ -88,8 +88,9 @@
             
                 <button id="copyBtn">Copy text</button>
             <textarea name="text" rows="20" placeholder="Start Typing!" id="textinput" required></textarea>
-            <form method="post" enctype="multipart/form-data" action="{% url 'lanfiles' %}">
+            <form method="post" id="form3" enctype="multipart/form-data" action="{% url 'lanfiles' %}">
                 {% csrf_token %}
+                <input type="hidden" name="addr" id="addr">
                 <input type="file" name="lanfile" id="fileinput" multiple>
                 <div id="area">
                 </div>

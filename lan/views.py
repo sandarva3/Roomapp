@@ -4,6 +4,7 @@ import json
 from .models import Text, Lanfiles
 from django.utils import timezone
 import time
+import requests
 
 def lanAjax_view(request):
     if request.method == "POST":
@@ -34,11 +35,12 @@ def delFile_view(request, id):
 def files_view(request):
     if request.method == "POST":
         files = request.FILES.getlist('lanfile')
+        address = request.POST.get('addr')
         current_time = int(time.time())
-        address = '27.34.64.148'
         for f in files:
             Lanfiles.objects.create(file=f, Funix_time=current_time, Faddress=address)
             print(f"FILE: {f}")
+            print(f"THE ADDRESS ALSO ARRIVED ALONG WITH FILE: {address}")
         return redirect('lan')
 
 
@@ -80,23 +82,25 @@ def async_view(request):
 
 def lan_view(request):
     try:
-        client_ip = request.META.get('REMOTE_ADDR')
-        print(f"THE CLIENT IP IS: {client_ip}")
-        latest = Text.objects.latest('created_at')
-        files = Lanfiles.objects.all()
-        # print(f"WORKING: {files}")
-        filesurl = []
-        for file in  files:
-            # print(f"The file name is: {file}")
-            file_url = request.build_absolute_uri(file.file.url)
-            # print(f"THe file url is: {file_url}")
-            filesurl.append({'id':file.id, 'name': file, 'url':file_url})
-        # print(f'The latest text: {latest.texts}')
-        context = {
-            'files': filesurl,
-            'latest': latest.texts,
-        }
-        return render(request, 'lan/locale.html', context)
+        response = requests.get('https://api.ipify.org?format=json')
+        data = response.json()
+        ipAd = data.get("ip")
+        print(f"THE PUBLIC IP ADDRESS FROM IPIFY IS: {ipAd}")
+        try:
+            latest = Text.objects.filter(Taddress=ipAd).latest('created_at')
+            files = Lanfiles.objects.filter(Faddress=ipAd).all()
+            filesurl = []
+            for file in  files:
+                file_url = request.build_absolute_uri(file.file.url)
+                filesurl.append({'id':file.id, 'name': file, 'url':file_url})
+            context = {
+                'files': filesurl,
+                'latest': latest.texts,
+            }
+            return render(request, 'lan/locale.html', context)
+        except Exception as e:
+            print(f"Error in getting details: {e}")
+            return render(request, 'lan/locale.html')
+    
     except Exception as e:
-        # print(f"The error is: {e}")
-        return render(request, 'lan/locale.html')
+        print(f"IPIFY ERROR: {e}")
