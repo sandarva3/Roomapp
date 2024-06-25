@@ -1,9 +1,8 @@
 {% extends "room/base.html" %}
 {% load static %}
 {% block content %}
-
 <p style="margin-left: 50px;">
-    <a href="{% url 'lan' %}">Go to Locale</a>
+    <a class="goLocale" href="{% url 'lan' %}" title="go back to Locale">Go to Locale</a>
 </p>
 {% block js %}
 <script src="{% static 'roomjs/get.js' %}"></script>
@@ -22,7 +21,7 @@
             <br>
             <br>
             <div class="buttons">
-                <button type="submit" class="btn" id="submitBtn" onclick="submitBtnclick('submitBtn')">Submit</button>
+                <button type="submit" class="btn" id="submitBtn" onclick="submitBtnclick('submitBtn')">Create Room</button>
                 <!-- <button type="button" class="btn">Links</button>
                 <button type="button" class="btn">Upload</button>
                 <button type="button" class="btn">Download</button> -->
@@ -34,11 +33,13 @@
         <h3>Your room link: <p style="font-style: italic;" id="roomlink">{{room_url}}</p></h3>
         <button type="button" class="btn" id="copyUrl">Copy link</button>
         </div>
+        <br>
+        <hr>
         <h2>Enter room code/link: </h2>
         <form method="post" action="{% url 'room' %}">
             {% csrf_token %}
             <input type="text" name="code" placeholder="Enter room code">
-            <button type="submit" class="btn">Submit</button>
+            <button type="submit" class="btn">Get Room</button>
         </form>
     </div>
 </main>

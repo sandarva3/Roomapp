@@ -34,14 +34,19 @@ def delFile_view(request, id):
 
 def files_view(request):
     if request.method == "POST":
-        files = request.FILES.getlist('lanfile')
-        address = request.POST.get('addr')
-        current_time = int(time.time())
-        for f in files:
-            Lanfiles.objects.create(file=f, Funix_time=current_time, Faddress=address)
-            print(f"FILE: {f}")
-            print(f"THE ADDRESS ALSO ARRIVED ALONG WITH FILE: {address}")
-        return redirect('lan')
+        try:
+            files = request.FILES.getlist('lanfile')
+            address = request.POST.get('addr')
+            current_time = int(time.time())
+            for f in files:
+                Lanfiles.objects.create(file=f, Funix_time=current_time, Faddress=address)
+                print(f"FILE: {f}")
+                print(f"THE ADDRESS ALSO ARRIVED ALONG WITH FILE: {address}")
+            return redirect('lan')
+        except Exception as e:
+            print(f"An ERROR occured while user upload files: {e}")
+            return HttpResponse("SOMETHING Went Wrong. Probably Due to slow network. Please Try again.")
+
 
 
 def async_view(request):

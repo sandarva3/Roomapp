@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
     getIP();
     setTimeout(() => {
         this.submit();
-    }, (500));
+    }, (700));
 });
 
 // COPY THE TEXT OF TEXTAREA

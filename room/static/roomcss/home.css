@@ -5,6 +5,17 @@ body {
     padding: 0;
 }
 
+.goLocale{
+    background-color: rgb(68, 34, 205);
+    color: white;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 10px;
+}
+.goLocale:hover{
+    background-color: rgb(51, 0, 255);
+}
+
 .Alldownload{
     margin-top: 10px;
     background-color: rgb(204, 105, 105);
@@ -59,8 +70,16 @@ textarea {
     border-radius: 5px;
 }
 
+#copyCode{
+    padding: 5px;
+}
+
+#copyUrl{
+    padding: 5px;
+}
+
 .btn:hover {
-    background-color: #0056b3;
+    background-color: #1c73cf;
 }
 
 input[type="text"] {

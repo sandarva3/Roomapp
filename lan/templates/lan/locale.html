@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Sharing Interface</title>
     {% block css %}
-    <link rel="stylesheet" href="{% static 'roomcss/home.css' %}">
+    <link rel="stylesheet" href="{% static 'lancss/locale.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
     button {
         background-color: rgb(77, 77, 196);
@@ -31,16 +32,41 @@
     }
     
     .delfile{
-       text-decoration: underline;
+        text-decoration: none;
        color: red;
+       visibility: hidden;
+       margin-left: 20px;
+       font-size: 25px;
+       /* background-color: red;
+       border-radius: 5px;
+       padding: 2px; */
     }
     .eachfile{
        text-decoration: none;
        color: black;
        cursor: pointer;
     }
-    .eachfile:hover{
-        text-decoration: underline;
+
+    .createR{
+        background-color: rgb(68, 34, 205);
+        color: white;
+        text-decoration: none;
+        padding: 5px;
+        border-radius: 10px;
+    }
+    .createR:hover{
+        background-color: rgb(51, 0, 255);
+    }
+
+    .file3{
+        margin: 5px;
+        display: inline-block;
+    }
+    .file3:hover .delfile{
+        visibility: visible;
+    }
+    .file3:hover{
+        border-bottom: 1px solid;
     }
     
     </style>
@@ -78,7 +104,7 @@
 
     {% block content %}
     <p style="margin-left: 50px;">
-        <a href="{% url 'home' %}">Go to home</a>
+        <a class="createR" href="{% url 'home' %}" title="Create Room">Create a Room</a>
     </p>
     <main>
         
@@ -94,20 +120,22 @@
                 <input type="file" name="lanfile" id="fileinput" multiple>
                 <div id="area">
                 </div>
+                <div class="buttons">
+                    <button type="submit" id="fileupload" style="padding: 3px;" class="btn">Upload files</button>
+                </div>
                 <hr>
                 <button type="submit" class="Alldownload" onclick="allFile(fileids)">Download all files</button>
 
                 <div id="lanfiles">
                     {% for file in files %}
-                    <a class="eachfile" href="#" onclick="sendReq('{{file.id}}')">
+                    <div class="file3">
+                    <a class="eachfile" href="#" title="Click to download this file" onclick="sendReq('{{file.id}}')">
                         - {{ file.name }} | 
                     </a> 
-                    <a class="delfile" href="{% url 'delfile' file.id %}" title="delete this file">&#10006;</a>
+                    <a class="delfile material-icons" href="{% url 'delfile' file.id %}" title="delete this file">delete</a>
+                    </div>
                     <br>
                     {% endfor %}
-                </div>
-                <div class="buttons">
-                    <button type="submit" id="fileupload" style="padding: 3px;" class="btn">Upload files</button>
                 </div>
             </form>
         </div>
