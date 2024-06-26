@@ -16,13 +16,13 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
 });
 
-    form3.addEventListener('submit', function(event){
+ /*   form3.addEventListener('submit', function(event){
     event.preventDefault();
     getIP();
     setTimeout(() => {
         this.submit();
     }, (700));
-});
+});  */
 
 // COPY THE TEXT OF TEXTAREA
     let copytext = document.getElementById('copyBtn');
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 });
     
 
-function getIP(){
+/*  function getIP(){
     fetch('https://api.ipify.org?format=json')
     .then(response => response.json())
     .then(data => {
@@ -52,7 +52,7 @@ function getIP(){
     .catch(error => {
         console.log('Error:', error);
     });
-};
+};   */
 
 
 //GET THE PUBLIC IP ADDRESS

@@ -8,20 +8,23 @@ import requests
 
 def lanAjax_view(request):
     if request.method == "POST":
-        data = json.loads(request.body)
-        fileid = data['code']
-        file = Lanfiles.objects.get(id=fileid)
-        fileurl = request.build_absolute_uri(file.file.url)
-        print(f"Data Received: {data['data']}")
-        print(f"FILEID: {fileid}")
-        print(f"File URL: {fileurl}")
+        try:
+            data = json.loads(request.body)
+            fileid = data['code']
+            file = Lanfiles.objects.get(id=fileid)
+            fileurl = request.build_absolute_uri(file.file.url)
+            print(f"Data Received: {data['data']}")
+            print(f"FILEID: {fileid}")
+            print(f"File URL: {fileurl}")
 
-        context = {
-            'response': 'Data received successfully',
-            'filename':file.file.name,
-            'file':fileurl
-        }
-        return JsonResponse(context)
+            context = {
+                'response': 'Data received successfully',
+                'filename':file.file.name,
+                'file':fileurl
+            }
+            return JsonResponse(context)
+        except Exception as e:
+            print(f"ERROR OCCURED TO DOWNLOAD FILE: {e}")
     else:
         return JsonResponse({'error':'Data not received'}, status=400)
 
@@ -35,30 +38,36 @@ def delFile_view(request, id):
 def files_view(request):
     if request.method == "POST":
         try:
-            files = request.FILES.getlist('lanfile')
-            address = request.POST.get('addr')
-            current_time = int(time.time())
-            for f in files:
-                Lanfiles.objects.create(file=f, Funix_time=current_time, Faddress=address)
-                print(f"FILE: {f}")
-                print(f"THE ADDRESS ALSO ARRIVED ALONG WITH FILE: {address}")
-            return redirect('lan')
+            response = requests.get('https://api.ipify.org?format=json')
+            data = response.json()
+            ipAd = data.get("ip")
+            try:
+                Dip = request.META.get('REMOTE_ADDR')
+                files = request.FILES.getlist('lanfile')
+                #address = request.POST.get('addr')
+                current_time = int(time.time())
+                for f in files:
+                    Lanfiles.objects.create(file=f, Funix_time=current_time, Faddress=ipAd)
+                    print(f"FILE: {f}")
+                    print(f"THE ADDRESS ALSO ARRIVED ALONG WITH FILE: {ipAd}")
+                return redirect('lan')
+            except Exception as e:
+                print(f"An ERROR occured while user upload files: {e}")
+                return HttpResponse("SOMETHING Went Wrong. Probably Due to slow network. Please Try again.")
         except Exception as e:
-            print(f"An ERROR occured while user upload files: {e}")
-            return HttpResponse("SOMETHING Went Wrong. Probably Due to slow network. Please Try again.")
-
+            print(f"IPIFY ERROR: {e}")
 
 
 def async_view(request):
     if request.method == "POST":
 
-        ip = request.META.get('REMOTE_ADDR')
+        Dip = request.META.get('REMOTE_ADDR')
         data = json.loads(request.body)
         message = data['data']
         address = data['ip']
         text = data['text']
         current_time = int(time.time())
-        print(f"The ip is: {ip}")
+        print(f"The ip is: {Dip}")
         print(f"The address is: {address}")
         Text.objects.create(texts=text, Tunix_time=current_time, Taddress=address)
 
@@ -71,7 +80,7 @@ def async_view(request):
 
         context = {
             'reply': "I got your Public IP address",
-            'device':ip,
+            'device':Dip,
             'network':address,
             'latest':latest_text
         }

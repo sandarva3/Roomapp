@@ -27,9 +27,6 @@
     #loading{
         visibility: hidden;
     } */
-    main{
-       width: 100%;
-    }
     
     .delfile{
         text-decoration: none;
@@ -106,13 +103,13 @@
     <p style="margin-left: 50px;">
         <a class="createR" href="{% url 'home' %}" title="Create Room">Create a Room</a>
     </p>
-    <main>
+    
         
-        <div class="container">
-            <img src="{% static 'lanimg/reloading.gif' %}" width="30px" alt="loading" id="loading">
-            <img src="{% static 'lanimg/done.png' %}" width="35x" alt="done" id="done">
-            
-                <button id="copyBtn">Copy text</button>
+    <div class="container">
+        <img src="{% static 'lanimg/reloading.gif' %}" width="30px" alt="loading" id="loading">
+        <img src="{% static 'lanimg/done.png' %}" width="35x" alt="done" id="done">
+        
+            <button id="copyBtn" class="btn3">Copy text</button>
             <textarea name="text" rows="20" placeholder="Start Typing!" id="textinput" required></textarea>
             <form method="post" id="form3" enctype="multipart/form-data" action="{% url 'lanfiles' %}">
                 {% csrf_token %}
@@ -140,5 +137,4 @@
             </form>
         </div>
         
-    </main>
     {% endblock content %}

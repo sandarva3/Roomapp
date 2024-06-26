@@ -5,6 +5,7 @@ Time_choices = [
     ('4 hour', '4 Hour'),
     ('12 hour', '12 Hour'),
     ('1 day', '1 Day'),
+    ('3 days', '3 Days'),
 ]
 
 class TimeForm(forms.Form):

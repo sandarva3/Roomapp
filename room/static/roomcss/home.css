@@ -70,16 +70,18 @@ textarea {
     border-radius: 5px;
 }
 
-#copyCode{
+.btn3{
     padding: 5px;
-}
-
-#copyUrl{
-    padding: 5px;
+    background-color: rgb(126, 80, 235);
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .btn:hover {
     background-color: #1c73cf;
+}
+
+.btn3:hover{
+    background-color: rgb(95, 53, 192);
 }
 
 input[type="text"] {

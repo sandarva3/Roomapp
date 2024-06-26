@@ -18,7 +18,8 @@ function sendReq(code){
         downloadFile(data['file'], data['filename']);
         console.log('Response from server:', data['response']);
         console.log('The name of clicked file is: ', data['filename']);
-        document.getElementById('jsonresponse').innerHTML = data['file'];
+        console.log('FILE URL: ', data['file']);
+        // document.getElementById('jsonresponse').innerHTML = data['file'];
     })
     .catch(error => {
         console.error('Error happened: ',error);
@@ -27,12 +28,16 @@ function sendReq(code){
 
 
 function downloadFile(url, filename){
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    try {
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } catch (error) {
+        console.log("THE ERROR: ", error);
+    }
 }
 
 

@@ -46,6 +46,8 @@ def home_view(request):
                     validation = 43200
                 elif time_choice == "1 day":
                     validation = 86400
+                elif time_choice == "3 days":
+                    validation = 259200
 
                 unix_time = time.time()
                 seconds = int(unix_time)
@@ -64,6 +66,7 @@ def home_view(request):
                 context = {
                 'room_code': room.code,
                 'room_url': request.build_absolute_uri(f'room/{room.code}'),
+                'state': True,
                 }
                 return render(request, 'room/home.html', context)
             
