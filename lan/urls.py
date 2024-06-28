@@ -8,10 +8,12 @@ from .views import(
     files_view,
     delFile_view,
     lanAjax_view,
+    first_view,
 )
 
 urlpatterns = [
-    path('', lan_view, name='lan'),
+    path('', first_view, name='first'),
+    path('lan/', lan_view, name='lan'),
     path('async/', async_view, name='async'),
     path('files/', files_view, name='lanfiles'),
     path('del/<int:id>', delFile_view, name='delfile'),

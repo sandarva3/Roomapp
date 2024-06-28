@@ -3,8 +3,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
     const done = document.getElementById('done');
     loading.style.display = "none";
     done.style.display = "none";
-    form3 = document.getElementById('form3');
-    console.log("FORM 3");
 
     //WHEN CHANGES ARE MADE IN TEXTAREA
     let textInput = document.getElementById('textinput');
@@ -15,14 +13,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
     checkIP(textValue);
 
 });
-
- /*   form3.addEventListener('submit', function(event){
-    event.preventDefault();
-    getIP();
-    setTimeout(() => {
-        this.submit();
-    }, (700));
-});  */
 
 // COPY THE TEXT OF TEXTAREA
     let copytext = document.getElementById('copyBtn');
@@ -37,22 +27,11 @@ document.addEventListener("DOMContentLoaded", ()=> {
         console.error('Failed to copy link: ', err);
     });
 });
-
-
-
 });
     
+let filesInArea = [];
 
-/*  function getIP(){
-    fetch('https://api.ipify.org?format=json')
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('addr').value = data.ip;
-    })
-    .catch(error => {
-        console.log('Error:', error);
-    });
-};   */
+
 
 
 //GET THE PUBLIC IP ADDRESS

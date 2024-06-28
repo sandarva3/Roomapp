@@ -65,7 +65,9 @@
     .file3:hover{
         border-bottom: 1px solid;
     }
-    
+    #waitArea{
+        display: none;
+    }
     </style>
     {% endblock css %}
 
@@ -76,7 +78,7 @@
         const lanAjaxUrl = "{% url 'lanAjax' %}";
         const latest = "{{ latest|escapejs }}";
         const fileURL = "{% url 'lanfiles' %}";
-        let fileids = []
+        let fileids = [];
         "{% for file in files %}"
         fileids.push('{{ file.id }}');
         "{% endfor %}"
@@ -84,7 +86,8 @@
     </script>
 
     <script src="{% static 'lanjs/locale.js' %}"></script>
-    <script src="{% static 'lanjs/getlan.js' %}"></script>
+    <script src="{% static 'lanjs/getlan.js' %}"></script>  
+    <script src="{% static 'lanjs/sendfiles.js' %}"></script>  
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -111,7 +114,7 @@
         
             <button id="copyBtn" class="btn3">Copy text</button>
             <textarea name="text" rows="20" placeholder="Start Typing!" id="textinput" required></textarea>
-            <form method="post" id="form3" enctype="multipart/form-data" action="{% url 'lanfiles' %}">
+            <!-- <form method="post" id="form3" enctype="multipart/form-data" action="{% url 'lanfiles' %}"> -->
                 {% csrf_token %}
                 <input type="hidden" name="addr" id="addr">
                 <input type="file" name="lanfile" id="fileinput" multiple>
@@ -120,6 +123,11 @@
                 <div class="buttons">
                     <button type="submit" id="fileupload" style="padding: 3px;" class="btn">Upload files</button>
                 </div>
+                <div id="waitArea">
+                    <img src="{% static 'lanimg/wait.gif' %}" id="waitImg" width="25px" alt="wait">
+                    <p style="display: inline;">Wait files are being uploaded...</p>
+                </div>
+            <!-- </form> -->
                 <hr>
                 <button type="submit" class="Alldownload" onclick="allFile(fileids)">Download all files</button>
 
@@ -134,7 +142,6 @@
                     <br>
                     {% endfor %}
                 </div>
-            </form>
         </div>
         
     {% endblock content %}

@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-j3&+9e-=3fh-q3w2oms!ytnb2re)g+q&oe8w7!#==x*47x5w9o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['roomapp.pythonanywhere.com', '127.0.0.1']
 
 
 # Application definition

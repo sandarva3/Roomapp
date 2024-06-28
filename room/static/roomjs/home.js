@@ -42,13 +42,13 @@ fileinput.addEventListener('change', function(event){
     let files = event.target.files;
     area.textContent = '';
     for(let i=0; i<(files.length); i++){
-        
+        filesInArea.push(files[i]);
         let filename = document.createElement('p');
         filename.textContent ='- ' + files[i].name;
         filename.style.color = 'gray';
         filename.style.margin = '5px';
         filename.style.fontSize = '15px';
         area.appendChild(filename);
-        
     }
+    console.log("FILES IN AREA: ", filesInArea);
 } )
