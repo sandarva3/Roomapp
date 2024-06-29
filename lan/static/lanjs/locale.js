@@ -69,7 +69,6 @@ function sendIP(address, text){
             'X-CSRFToken': csrf,
         },
         body: JSON.stringify({
-            'data':"Here I'm trying to send IP address",
             'ip':address,
             'text':text,
         })

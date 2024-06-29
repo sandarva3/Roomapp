@@ -13,13 +13,12 @@ def lanAjax_view(request):
             fileid = data['code']
             file = Lanfiles.objects.get(id=fileid)
             fileurl = request.build_absolute_uri(file.file.url)
-            print(f"Data Received: {data['data']}")
             print(f"FILEID: {fileid}")
             print(f"File URL: {fileurl}")
 
             context = {
                 'response': 'Data received successfully',
-                'filename':file.file.name,
+                'filename':file.file.name[9:],
                 'file':fileurl
             }
             return JsonResponse(context)
@@ -58,7 +57,6 @@ def async_view(request):
     if request.method == "POST":
 
         data = json.loads(request.body)
-        message = data['data']
         address = data['ip']
         text = data['text']
         current_time = int(time.time())
