@@ -1,12 +1,17 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import Room, Files
-from django.utils import timezone
 from .forms import TimeForm
 import time
-import datetime
+from pytz import timezone
 import pytz
+from datetime import datetime
 from django.http import JsonResponse
 import json
+
+
+def getNepTime(utcTime):
+    nepTime = timezone('Asia/Kathmandu')        
+    return ((utcTime).astimezone(nepTime))
 
 
 def ajax_view(request):
@@ -82,6 +87,8 @@ def home_view(request):
 
 
 def room_view(request):
+    Rampm = None
+    Tampm = None
     if request.method == "POST":
         try:
             code = request.POST.get('code')
@@ -92,7 +99,7 @@ def room_view(request):
                 print(f"the code from link is: {link}")
                 room = Room.objects.get(code=link)
                 files = room.files.all()
-                till_date = datetime.datetime.fromtimestamp(room.total_time, tz=pytz.utc)
+                till_date = datetime.fromtimestamp(room.total_time, tz=pytz.utc)
 
             else:
                 print(f"The code is: {code}")
@@ -100,13 +107,31 @@ def room_view(request):
                 files = room.files.all()
                 print(f"ROOM FOUND: {room}")
                 print(f"FILES IN ROOM: {files}")
-                till_date = datetime.datetime.fromtimestamp(room.total_time, tz=pytz.utc)
+                till_date = datetime.fromtimestamp(room.total_time, tz=pytz.utc)
+
+            NeproomTime = getNepTime(room.created_at)
+            NeptillTime = getNepTime(till_date)
+            print(f"Room creation time: {NeproomTime}")
+            print(f"TILL TIME: {NeptillTime}")
+            if (NeproomTime.hour < 12):
+                Rampm = "AM"
+            else:
+                Rampm = "PM"
+            if (NeptillTime.hour < 12):
+                Tampm = "AM"
+            else:
+                Tampm = "PM"
 
             context = {
                 'room':room,
                 'files':files,
-                'till_date': timezone.localtime(till_date),
+                'roomTime':str(NeproomTime)[:19],
+                'tillTime':str(NeptillTime)[:19],
+                'Rampm':Rampm,
+                'Tampm':Tampm,
+                # 'till_date': timezone.localtime(till_date),
             }
+            
             return render(request, 'room/room.html', context)
         except Exception as e:
             print(f"THE ERROR IS : {e}")
@@ -116,15 +141,33 @@ def room_view(request):
         
 
 def link_view(request, uuid):
+    Rampm = None
+    Tampm = None
     print(f"THE UUID: {uuid}")
     try: 
         room = Room.objects.get(code=uuid)
         files = room.files.all()
-        till_date = datetime.datetime.fromtimestamp(room.total_time, tz=pytz.utc)
+        till_date = datetime.fromtimestamp(room.total_time, tz=pytz.utc)
+
+        NeproomTime = getNepTime(room.created_at)
+        NeptillTime = getNepTime(till_date)
+        print(f"Room creation time: {NeproomTime}")
+        print(f"TILL TIME: {NeptillTime}")
+        if (NeproomTime.hour < 12):
+            Rampm = "AM"
+        else:
+            Rampm = "PM"
+        if (NeptillTime.hour < 12):
+            Tampm = "AM"
+        else:
+            Tampm = "PM"
         context = {
             'room':room,
             'files':files,
-            'till_date':till_date,
+            'roomTime':str(NeproomTime)[:19],
+            'tillTime':str(NeptillTime)[:19],
+            'Rampm':Rampm,
+            'Tampm':Tampm,
         }
         return render(request, 'room/room.html', context)
 

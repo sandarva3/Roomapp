@@ -2,9 +2,15 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.http import JsonResponse
 import json
 from .models import Text, Lanfiles
-from django.utils import timezone
+from pytz import timezone
 import time
-import requests
+from datetime import datetime
+
+
+def getNepTime(utcTime):
+    nepTime = timezone('Asia/Kathmandu')        
+    return ((utcTime).astimezone(nepTime))
+
 
 def lanAjax_view(request):
     if request.method == "POST":
@@ -90,6 +96,9 @@ def first_view(request):
 
 
 def lan_view(request):
+    nowTime = datetime.now()
+    currentTIme = getNepTime(nowTime)
+    print(f" THE CURRENT TIME: {currentTIme}")
     ipAd = None
     try:
         data = json.loads(request.body)

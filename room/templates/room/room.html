@@ -21,6 +21,10 @@
     console.log('FILE IDS ARRAY: ', fileids);
     const ajaxUrl = "{% url 'sendajax' %}";
     const csrf = "{{ csrf_token }}";
+    const roomTime = "{{roomTime}}";
+    const tillTime = "{{tillTime}}";
+    console.log("ROOM TIME: ", roomTime);
+    console.log("TILL TIME: ", tillTime);
 </script>
 {% endblock jstop %}
 
@@ -40,9 +44,9 @@
         <button type="button" class="btn">Back to Homepage</button>
         </a>
         <h2>Room</h2>
-        <i style="font-size: small;">This room was created at: <b>{{room.created_at}}</b></i>
+        <i style="font-size: small;">This room was created at: <b>{{roomTime}} {{Rampm}}</b></i>
         <br>
-        <i style="font-size: small;">and would remain till: <b>{{till_date}}</b></i>
+        <i style="font-size: small;">and would remain till: <b>{{tillTime}} {{Tampm}}</b></i>
         <h3>The text in room:</h3>
         <button id="copytext">Copy text</button>
         <pre class="room-text" id="text">{{room.text}}</pre>
