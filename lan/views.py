@@ -7,11 +7,6 @@ import time
 from datetime import datetime
 
 
-def getNepTime(utcTime):
-    nepTime = timezone('Asia/Kathmandu')        
-    return ((utcTime).astimezone(nepTime))
-
-
 def lanAjax_view(request):
     if request.method == "POST":
         try:
@@ -96,9 +91,6 @@ def first_view(request):
 
 
 def lan_view(request):
-    nowTime = datetime.now()
-    currentTIme = getNepTime(nowTime)
-    print(f" THE CURRENT TIME: {currentTIme}")
     ipAd = None
     try:
         data = json.loads(request.body)

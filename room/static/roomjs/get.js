@@ -5,7 +5,7 @@ function sendReq(code){
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': csrf
+            'X-CSRFToken': csrfToken3
         },
         body: JSON.stringify(
             {

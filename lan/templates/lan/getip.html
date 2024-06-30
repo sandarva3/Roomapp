@@ -1,45 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Room app</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const csrfToken = "{{ csrf_token }}";
-            const url = "{% url 'lan' %}";
-            getIP(url, csrfToken);
-        });
+      document.addEventListener("DOMContentLoaded", () => {
+        const url = "{% url 'lan' %}";
+        const cs = "{{ csrf_token }}";
+        getIP(url, cs);
+      });
 
-        function getIP(url, csrfToken){
-         fetch('https://api.ipify.org?format=json')
-         .then(response => response.json())
-         .then(data => {
-             send(url, csrfToken, data.ip);
-         })
-         .catch(error => {
-             console.log('Error:', error);
-         });
- };
-        
-        function send(url, csrfToken, ipAd){
-            fetch(url, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken,
-                },
-                body: JSON.stringify({ 'ipAd': ipAd })
-            })
-            .then(response => response.text())  // Capture the server response as text
-            .then(html => {
-                document.open();                // Open the document for writing
-                document.write(html);           // Write the new HTML content
-                document.close();               // Close the document
-            })
-            .catch(error => console.error('Error:', error));
-        };
+      function getIP(url, csrfToken) {
+        fetch("https://api.ipify.org?format=json")
+          .then((response) => response.json())
+          .then((data) => {
+            send(url, csrfToken, data.ip);
+          })
+          .catch((error) => {
+            console.log("Error:", error);
+          });
+      }
+
+      function send(url, csrfToken, ipAd) {
+        fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken,
+          },
+          body: JSON.stringify({ ipAd: ipAd }),
+        })
+          .then((response) => response.text()) // Capture the server response as text
+          .then((html) => {
+            document.open(); // Open the document for writing
+            document.write(html); // Write the new HTML content
+            document.close(); // Close the document
+          })
+          .catch((error) => console.error("Error:", error));
+      }
     </script>
-</body>
+  </body>
 </html>

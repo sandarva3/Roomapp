@@ -29,7 +29,7 @@ function sendFiles(filesInArea, ipAddress){
     fetch(fileURL, {
         method: "POST",
         headers:{
-            'X-CSRFToken': csrf
+            'X-CSRFToken': csrfToken3
         },
         body: formData
     })

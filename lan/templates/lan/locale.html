@@ -74,7 +74,7 @@
     {% block jstop %}
     <script>
         const ip_url = "{% url 'async' %}";
-        const csrf = "{{ csrf_token }}";
+        const csrf = csrfToken3;
         const lanAjaxUrl = "{% url 'lanAjax' %}";
         const latest = "{{ latest|escapejs }}";
         const fileURL = "{% url 'lanfiles' %}";
