@@ -6,13 +6,16 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
     //WHEN CHANGES ARE MADE IN TEXTAREA
     let textInput = document.getElementById('textinput');
+    const debouncedCheckIP = debounce(checkIP, 750);
+
     textInput.addEventListener("input", function(){
         done.style.display = "none";
         loading.style.display = "block";
     const textValue = textInput.value;
-    checkIP(textValue);
-
+    // checkIP(textValue);
+    debouncedCheckIP(textValue);
 });
+
 
 // COPY THE TEXT OF TEXTAREA
     let copytext = document.getElementById('copyBtn');
@@ -28,7 +31,21 @@ document.addEventListener("DOMContentLoaded", ()=> {
     });
 });
 });
+
+
+function debounce(func, delay) {
+    let timeoutId; // Variable to store the timeout ID
+    return function(...args) { // Return a new function that will be called in place of the original function
+      clearTimeout(timeoutId); // Clear any previously set timeout to reset the delay
+      timeoutId = setTimeout(() => { // Set a new timeout
+        func.apply(this, args); // Call the original function with the context and arguments
+      }, delay); // Delay in milliseconds
+    };
+  };
+
     
+
+
 let filesInArea = [];
 
 
