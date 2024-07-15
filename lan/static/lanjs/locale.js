@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
     //WHEN CHANGES ARE MADE IN TEXTAREA
     let textInput = document.getElementById('textinput');
-    const debouncedCheckIP = debounce(checkIP, 750);
+    const debouncedCheckIP = debounce(checkIP, 650);
 
     textInput.addEventListener("input", function(){
         done.style.display = "none";
