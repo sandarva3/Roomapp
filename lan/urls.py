@@ -9,6 +9,7 @@ from .views import(
     delFile_view,
     lanAjax_view,
     first_view,
+    about_view,
 )
 
 urlpatterns = [
@@ -17,7 +18,8 @@ urlpatterns = [
     path('async/', async_view, name='async'),
     path('files/', files_view, name='lanfiles'),
     path('del/<int:id>', delFile_view, name='delfile'),
-    path('lanEndpoint', lanAjax_view, name='lanAjax')
+    path('lanEndpoint', lanAjax_view, name='lanAjax'),
+    path('about/', about_view, name='about'),
 ]
 
 if settings.DEBUG:

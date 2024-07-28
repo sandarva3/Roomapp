@@ -62,18 +62,18 @@
         <div class="container mx-auto flex justify-between items-center py-4 px-6">
             <div class="flex items-center">
                 <div class="p-0 m-0 w-56">
-                    <a href="index.html">
+                    <a href="{% url 'lan' %}">
                         <img src="{% static 'lanimg/Roomapp.png' %}" class="logo dark:rounded-xl" alt="logo" width="max">
                     </a>
                     <i class="ml-3 dark:text-gray-300" style="font-size: medium;">Share anything Instantly</i>
                 </div>
             </div>
             <nav class="flex items-center space-x-8">
-                <a href="index.html" class="text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">
+                <a href="{% url 'lan' %}" class="text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">
                     <i class="fa-solid fa-house"></i> Home
                 </a>
-                <a href="about.html" class="text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">
-                    What's Roomapp <i class="fa-regular fa-circle-question"></i>
+                <a href="{% url 'about' %}" class="text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">
+                    What is Roomapp <i class="fa-regular fa-circle-question"></i>
                 </a>
                 <a href="#" class="text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500" id="friendBtn">
                     Show to Friend <i class="fa-solid fa-user-group friend"></i>
@@ -81,8 +81,8 @@
                 <div class="relative">
                     <button id="support-button" class="text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">Support <i class="fa fa-caret-down"></i></button>
                     <div id="support-dropdown" class="absolute hidden bg-white dark:bg-gray-800 shadow-md mt-2 py-2 w-48">
-                        <a href="faq.html" class="block px-4 py-2 text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">FAQ</a>
-                        <a href="contact.html" class="block px-4 py-2 text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">Contact</a>
+                        <a href="#" class="block px-4 py-2 text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">FAQ</a>
+                        <a href="#" class="block px-4 py-2 text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">Contact</a>
                     </div>
                 </div>
             </nav>

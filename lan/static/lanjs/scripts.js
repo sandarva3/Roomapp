@@ -1,8 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // console.log("LOCAL STORAGE: ", localStorage);
-    // const lightSwitches = document.querySelectorAll('.light-switch');
-
-
     //Focus textBox on loading of Page
     window.onload = () => {
         document.getElementById('textBox3').focus();
@@ -30,37 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
             });
-
-
-    // //DarkMode Logic
-    // if (localStorage.getItem('dark-mode') === 'true') {
-    //     lightSwitches.forEach(lightSwitch => lightSwitch.checked = true);
-    //     document.documentElement.classList.add('dark');
-    // } else {
-    //     document.documentElement.classList.remove('dark');
-    // }
-
-    // lightSwitches.forEach(lightSwitch => {
-    //     if(lightSwitch.checked){
-    //         document.getElementById('darkSwitch').textContent = "LIGHT";
-    //     }
-    //     else{
-    //         document.getElementById('darkSwitch').textContent = "DARK";
-    //     }
-    //     lightSwitch.addEventListener('change', () => {
-    //         if (lightSwitch.checked) {
-    //             document.documentElement.classList.add('dark');
-    //             localStorage.setItem('dark-mode', 'true');
-    //             document.getElementById('darkSwitch').textContent = "LIGHT";
-    //         } else {
-    //             document.documentElement.classList.remove('dark');
-    //             localStorage.setItem('dark-mode', 'false');
-    //             document.getElementById('darkSwitch').textContent = "DARK";
-    //         }
-    //     });
-    // });
-
-    
     
     
 //TypeWriting Logic
@@ -138,7 +103,7 @@ document.getElementById('tweetBtn').onclick = () =>{
     window.open(twitterUrl, '_blank');
 }
 
-// script.js
+
 document.getElementById('friendBtn').addEventListener('click', function() {
     document.getElementById('overlay').style.display = 'flex';
 });
