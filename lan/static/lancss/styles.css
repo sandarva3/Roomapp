@@ -1,0 +1,117 @@
+@layer utilities {
+    .header {
+        content-visibility: auto;
+        font-family: 'Courier New', Courier, monospace;
+    }
+}
+
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-content {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.overlay-content img {
+    margin-top: 50px;
+    width: 70%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.close-btn {
+    display: flex;
+    color: white;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+.close-btn-2{
+    font-size: 45px;
+}
+
+
+.darkBtn:hover{
+    background-color: rgb(189, 189, 189);
+}
+
+.uploadBtn:hover{
+    background-color: blue;
+}
+
+.downloadBtn:hover{
+    background-color: rgb(215, 0, 0);
+}
+
+.homeBtn:hover{
+    background-color: rgb(44, 118, 237);
+}
+.aboutBtn:hover{
+    background-color: rgb(44, 118, 237);
+}
+
+/* .line {
+    border-bottom: 1px solid black;
+    padding: 0px;
+    margin: 0px;
+} */
+
+.aboutContent{
+    text-align: center;
+    align-items: center;
+}
+
+.reload {
+    background-color: rgb(203, 39, 39);
+    border-radius: 6px;
+    box-shadow: 1px 0px 2px gray;
+}
+.filesTitle {
+    font-family: sans-serif;
+}
+
+.delfile{
+text-decoration: none;
+color: red;
+visibility: hidden;
+margin-left: 50px;
+}
+.file3{
+margin: 5px;
+display: inline-block;
+}
+.file3:hover .delfile{
+    visibility: visible;
+}
+.file3:hover{
+    border-bottom: 1px solid;
+}
+.italicText{
+    padding: 0px;
+    color: gray;
+    font-size: smaller;
+    font-weight: lighter;
+}
+textarea:focus{
+    outline-color: rgb(113, 163, 255);
+}
+.shareBtn{
+    background-color: rgb(95, 45, 203);
+}
+.shareBtn:hover{
+    background-color: rgb(80, 27, 193)
+}

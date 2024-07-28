@@ -34,7 +34,6 @@ ALLOWED_HOSTS = ['roomapp.pythonanywhere.com', '127.0.0.1']
 
 INSTALLED_APPS = [
     'lan',
-    'room',
     'django_apscheduler',
 
     'django.contrib.admin',

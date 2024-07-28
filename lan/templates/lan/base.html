@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roomapp</title>
+
+    <script src="https://kit.fontawesome.com/187b847ba0.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+                    },
+                    spacing: {
+                        '128': '28rem', // Custom height for the text box
+                    }
+                }
+            }
+        }
+    </script>
+
+    {% block css %}
+    {% endblock css %}
+
+    <script>
+        function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    
+    const csrfToken3 = getCookie('csrftoken');
+    
+    </script>
+    {% block jstop %}
+    {% endblock jstop %}
+
+</head>
+
+
+<body class="bg-gray-100 text-black dark:bg-gray-900 dark:text-white font-sans leading-normal tracking-normal">
+
+    <header class="bg-white dark:bg-gray-800 shadow">
+        <div class="container mx-auto flex justify-between items-center py-4 px-6">
+            <div class="flex items-center">
+                <div class="p-0 m-0 w-56">
+                    <a href="index.html">
+                        <img src="Roomapp.png" class="logo dark:rounded-xl" alt="logo" width="max">
+                    </a>
+                    <i class="ml-3 dark:text-gray-300" style="font-size: medium;">Share anything Instantly</i>
+                </div>
+            </div>
+            <nav class="flex items-center space-x-8">
+                <a href="index.html" class="text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">
+                    <i class="fa-solid fa-house"></i> Home
+                </a>
+                <a href="about.html" class="text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">
+                    What's Roomapp <i class="fa-regular fa-circle-question"></i>
+                </a>
+                <a href="#" class="text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500" id="friendBtn">
+                    Show to Friend <i class="fa-solid fa-user-group friend"></i>
+                </a>
+                <div class="relative">
+                    <button id="support-button" class="text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">Support <i class="fa fa-caret-down"></i></button>
+                    <div id="support-dropdown" class="absolute hidden bg-white dark:bg-gray-800 shadow-md mt-2 py-2 w-48">
+                        <a href="faq.html" class="block px-4 py-2 text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">FAQ</a>
+                        <a href="contact.html" class="block px-4 py-2 text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">Contact</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center ml-3">
+                    <input type="checkbox" id="theme-toggle" class="toggle-checkbox hidden" />
+                    <span class="mr-3" id="darkText">Night Mode</span>
+                    <label for="theme-toggle" class="toggle-label block w-14 h-8 rounded-full cursor-pointer bg-gray-300 dark:bg-gray-600 relative">
+                        <span id="darkSwitch" class="absolute left-1 top-1 w-6 h-6 bg-white rounded-full transform transition-transform"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    {% block content %}
+    {% endblock content %}
+
+
+    <footer class="bg-white dark:bg-gray-800 shadow mt-8">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-sm text-gray-500 dark:text-gray-400">
+                © 2024 Roomapp- share anything instantly. Share Files & text between your devices connected on same wifi/network.
+                <br>
+                Shared files are on full original quality and are not compressed.
+            </div>
+            <div class="flex space-x-4">
+                <a href="#" class="text-sm text-gray-500 dark:text-gray-400">Privacy Policy</a>
+                <a href="#" class="text-sm text-gray-500 dark:text-gray-400">Contact Us</a>
+            </div>
+        </div>
+        <div class="container mx-auto px-6 py-2 text-center">
+            <span class="text-sm text-gray-500 dark:text-gray-400">Version 1.0.5</span>
+        </div>
+    </footer>
+    
+    {% block js %}
+    {% endblock js %}
+</body>
+</html>

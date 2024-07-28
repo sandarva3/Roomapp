@@ -1,74 +1,8 @@
-{% extends "room/base.html" %}
+{% extends "base.html" %}
 {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Sharing Interface</title>
+
     {% block css %}
-    <link rel="stylesheet" href="{% static 'lancss/locale.css' %}">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-    button {
-        background-color: rgb(77, 77, 196);
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 4px 8px;
-        font-size: 16px;
-        cursor: pointer;
-        margin: 5px;
-    }
-
-    button:hover {
-        background-color: rgb(83, 83, 232);
-    }
-    /* #done{
-        visibility: hidden;
-    }
-    #loading{
-        visibility: hidden;
-    } */
-    
-    .delfile{
-        text-decoration: none;
-       color: red;
-       visibility: hidden;
-       margin-left: 20px;
-       font-size: 25px;
-       /* background-color: red;
-       border-radius: 5px;
-       padding: 2px; */
-    }
-    .eachfile{
-       text-decoration: none;
-       color: black;
-       cursor: pointer;
-    }
-
-    .createR{
-        background-color: rgb(68, 34, 205);
-        color: white;
-        text-decoration: none;
-        padding: 5px;
-        border-radius: 10px;
-    }
-    .createR:hover{
-        background-color: rgb(51, 0, 255);
-    }
-
-    .file3{
-        margin: 5px;
-        display: inline-block;
-    }
-    .file3:hover .delfile{
-        visibility: visible;
-    }
-    .file3:hover{
-        border-bottom: 1px solid;
-    }
-    #waitArea{
-        display: none;
-    }
-    </style>
+    <link rel="stylesheet" href="{% static 'lancss/styles.css' %}">
     {% endblock css %}
 
     {% block jstop %}
@@ -91,7 +25,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById('textinput').value = latest;
+            document.getElementById('textBox').value = latest;
         });
         const loading = document.getElementById('loading');
         const done = document.getElementById('done');
@@ -101,19 +35,87 @@
     
     {% endblock jstop %}
 
+
     {% block content %}
-    <p style="margin-left: 50px;">
-        <a class="createR" href="{% url 'home' %}" title="Create Room">Create a Room</a>
-    </p>
+
+    <main class="container mx-auto mt-5 px-6">
+        <div id="overlay" class="overlay">
+            <div class="overlay-content">
+                <img src="RoomappQR.png" alt="Image">
+                <span class="close-btn" id="closeBtn"><i class="fa-solid fa-xmark text-4xl close-btn-2"></i></span>
+            </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+            <div>
+                <button id="copyBtn" class="px-1 py-1 bg-gray-500 text-white rounded mb-1 mt-0" style="font-family: 'Courier';">
+                    <i class="fa-regular fa-copy"></i> Copy text</button>
+            </div>
+
+            <textarea id="textBox" class="border border-gray-300 dark:border-gray-600 rounded-lg h-128 p-4 mb-4 w-full bg-white dark:bg-gray-700 text-black dark:text-white"
+             placeholder=""></textarea>
+             <button id="reloadBtn" class="px-2 py-1 text-white mb-2 reload">&#8634; Reload</button>
+
+             <!-- USED FOR LINE BETWEEN FILE SECTION AND TEXT SECTION IN UI. DON'T DELETE -->
+             <div class="line border-b-2 border-solid border-gray-400"></div>
+
+             <button type="submit" id="fileupload" class="px-2 py-1 bg-blue-600 text-white dark:bg-blue-500 rounded mb-3 mt-5 uploadBtn">
+                <i class="fa-solid fa-file-arrow-up mr-1"></i> Upload Files
+            </button>
+
+            <div id="lanfiles" class="filesArea border border-gray-300 dark:border-gray-600 rounded-lg p-4">
+                <div class="text-lg font-bold mb-5 filesTitle">Files in the Room<i class="italicText">(Click to download)</i>:</div>
+                <ul class="list-disc list-inside space-y-2">
+                    {% for file in files %}
+                    <div class="file3">
+                        <li class="flex justify-between items-center">
+                            <a class="eachfile" href="#" onclick="sendReq('{{file.id}}')">
+                                <span class="_file">- {{ file.name }}</span>
+                            </a>
+                            <a href="{% url 'delfile' file.id %}" title="delete this file"><i class="fa-solid fa-trash"></i></a>
+                        </li>
+                    </div>
+                    <br>
+                    {% endfor %}
+                </ul>
+            </div>
     
-        
-    <div class="container">
+            <button class="px-2 py-1 bg-orange-700 dark:bg-orange-700 text-white rounded mt-3 downloadBtn" onclick="allFile(fileids)">
+                <i class="fa-solid fa-file-arrow-down mr-1"></i> Download all Files
+            </button>
+            <div class="flex justify-between items-center mt-4">
+
+                <!-- JUST here to create a gap. Don't remove below div element blindly -->
+                <div>
+                </div>
+
+                <div class="flex space-x-2">
+                    <button class="px-4 py-2 text-white rounded shareBtn">
+                        <i class="fa-solid fa-share"></i> Share
+                    </button>
+                    <!-- <button class="px-4 py-2 text-white rounded shareBtn">
+                        Follow <i class="fa-solid fa-plus"></i></button> -->
+                    <button class="px-4 py-2 text-white rounded shareBtn" id="tweetBtn">
+                        Tweet <i class="fa-brands fa-x-twitter"></i></button>
+                    <button class="px-4 py-2 text-white rounded shareBtn linkedinBtn" id="linkedinBtn">
+                        Post on Linkedin <i class="fa-brands fa-linkedin"></i>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    {% endblock content %}
+
+   
+    <!-- <div class="container">
         <img src="{% static 'lanimg/reloading.gif' %}" width="30px" alt="loading" id="loading">
         <img src="{% static 'lanimg/done.png' %}" width="35x" alt="done" id="done">
         
             <button id="copyBtn" class="btn3">Copy text</button>
-            <textarea name="text" rows="20" placeholder="Start Typing!" id="textinput" required></textarea>
-            <!-- <form method="post" id="form3" enctype="multipart/form-data" action="{% url 'lanfiles' %}"> -->
+            <textarea name="text" rows="20" placeholder="Start Typing!" id="textBox" required></textarea>
                 {% csrf_token %}
                 <input type="hidden" name="addr" id="addr">
                 <input type="file" name="lanfile" id="fileinput" multiple>
@@ -126,7 +128,6 @@
                     <img src="{% static 'lanimg/wait.gif' %}" id="waitImg" width="25px" alt="wait">
                     <p style="display: inline;">Wait files are being uploaded...</p>
                 </div>
-            <!-- </form> -->
                 <hr>
                 <button type="submit" class="Alldownload" onclick="allFile(fileids)">Download all files</button>
 
@@ -141,6 +142,4 @@
                     <br>
                     {% endfor %}
                 </div>
-        </div>
-        
-    {% endblock content %}
+        </div> -->

@@ -5,13 +5,13 @@ document.addEventListener("DOMContentLoaded", ()=> {
     done.style.display = "none";
 
     //WHEN CHANGES ARE MADE IN TEXTAREA
-    let textInput = document.getElementById('textinput');
+    let textBox = document.getElementById('textBox');
     const debouncedCheckIP = debounce(checkIP, 650);
 
-    textInput.addEventListener("input", function(){
+    textBox.addEventListener("input", function(){
         done.style.display = "none";
         loading.style.display = "block";
-    const textValue = textInput.value;
+    const textValue = textBox.value;
     // checkIP(textValue);
     debouncedCheckIP(textValue);
 });
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", ()=> {
 // COPY THE TEXT OF TEXTAREA
     let copytext = document.getElementById('copyBtn');
     copytext.addEventListener("click", () => {
-    const texts = document.getElementById('textinput').value;
+    const texts = document.getElementById('textBox').value;
     navigator.clipboard.writeText(texts).then(() => {
         copytext.textContent = "text copied!";
         setTimeout(() =>{

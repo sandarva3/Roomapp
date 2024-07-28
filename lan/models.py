@@ -9,6 +9,7 @@ class Text(models.Model):
 
     def __str__(self):
         return self.texts
+        
 
 class Lanfiles(models.Model):
     file = models.FileField(upload_to='lanmedia', null=True)
@@ -16,6 +17,30 @@ class Lanfiles(models.Model):
     Funix_time = models.IntegerField(default=60)
     Faddress = models.GenericIPAddressField(protocol='both', unpack_ipv4=False, default='27.34.64.148')
     Djip = models.TextField(max_length=12, null=True)
+
     def __str__(self):
         return (self.file.name[9:])
-    
+
+
+
+'''   class IpObject(models.Model):
+    IP  = models.GenericIPAddressField(protocol='both', unpack_ipv4=False, default='27.34.64.148')
+    texts = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    file = models.FileField(upload_to='lanmedia', null=True)
+    uploaded_at = models.DateTimeField(null=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+
+class Allthings(models.Model):
+    Ip_object = models.ForeignKey()
+    texts = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    file = models.FileField(null=True)
+    uploaded_at = models.DateTimeField(null=True)
+    modified_at = {
+        models.DateTimeField, texts
+    }
+    deletion_time = {
+        models.DateTimeField(), filename
+    }   '''
