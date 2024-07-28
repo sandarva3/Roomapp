@@ -41,7 +41,7 @@
     <main class="container mx-auto mt-5 px-6">
         <div id="overlay" class="overlay">
             <div class="overlay-content">
-                <img src="RoomappQR.png" alt="Image">
+                <img src="{% static 'lanimg/RoomappQR.png' %}" alt="Image">
                 <span class="close-btn" id="closeBtn"><i class="fa-solid fa-xmark text-4xl close-btn-2"></i></span>
             </div>
         </div>
@@ -57,7 +57,11 @@
              <button id="reloadBtn" class="px-2 py-1 text-white mb-2 reload">&#8634; Reload</button>
 
              <!-- USED FOR LINE BETWEEN FILE SECTION AND TEXT SECTION IN UI. DON'T DELETE -->
+
              <div class="line border-b-2 border-solid border-gray-400"></div>
+             <input type="file" name="lanfile" id="fileinput" multiple>
+            <div id="area">
+            </div>
 
              <button type="submit" id="fileupload" class="px-2 py-1 bg-blue-600 text-white dark:bg-blue-500 rounded mb-3 mt-5 uploadBtn">
                 <i class="fa-solid fa-file-arrow-up mr-1"></i> Upload Files
