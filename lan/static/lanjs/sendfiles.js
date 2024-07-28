@@ -2,18 +2,17 @@ document.addEventListener('DOMContentLoaded', () =>{
     uploadBtn = document.getElementById('fileupload');
 
 uploadBtn.addEventListener('click', () =>{
-    const waitArea = document.getElementById('waitArea');
     uploadBtn.style.display = 'none';
-    waitArea.style.display = 'block';
-    getIP(filesInArea);
+    let files = document.getElementById('fileinput').files;
+    getIP(files);
 });
 });
 
-function getIP(filesInArea){
+function getIP(files){
     fetch('https://api.ipify.org?format=json')
     .then(response => response.json())
     .then(data => {
-        sendFiles(filesInArea, data.ip);
+        sendFiles(files, data.ip);
     })
     .catch(error => {
         console.log('Error:', error);
@@ -21,11 +20,11 @@ function getIP(filesInArea){
 };
 
 
-async function sendFiles(filesInArea, ipAddress){
+async function sendFiles(files, ipAddress){
     const _filesPromises = [];
-    for(let i=0; i<filesInArea.length; i++){
+    for(let i=0; i<files.length; i++){
         let formData = new FormData();
-        formData.append('file', filesInArea[i]);
+        formData.append('file', files[i]);
         formData.append('ipAddress', ipAddress);
 
         const _filePromise = fetch(fileURL, {
@@ -46,29 +45,3 @@ async function sendFiles(filesInArea, ipAddress){
         console.error("NAHI HUA BHAI...", error);
     }
 };
-
-
-
-
-/*  function sendFiles(filesInArea, ipAddress){
-    let formData = new FormData();
-    for(let i=0; i<filesInArea.length; i++){
-        formData.append('file', filesInArea[i]);
-        formData.append('ipAddress', ipAddress);
-    }
-    fetch(fileURL, {
-        method: "POST",
-        headers:{
-            'X-CSRFToken': csrfToken3
-        },
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('FILE Status: ', data.status);
-        location.reload();
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-};  */

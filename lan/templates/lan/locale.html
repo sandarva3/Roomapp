@@ -19,18 +19,14 @@
         console.log('FILE IDS ARRAY: ', fileids);
     </script>
 
-    <script src="{% static 'lanjs/locale.js' %}"></script>
     <script src="{% static 'lanjs/getlan.js' %}"></script>  
     <script src="{% static 'lanjs/sendfiles.js' %}"></script>  
+    <script src="{% static 'lanjs/locale.js' %}"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById('textBox').value = latest;
+            document.getElementById('textBox3').value = latest;
         });
-        const loading = document.getElementById('loading');
-        const done = document.getElementById('done');
-        loading.style.display = "none";
-        done.style.display = "none";
     </script>
     
     {% endblock jstop %}
@@ -38,32 +34,37 @@
 
     {% block content %}
 
-    <main class="container mx-auto mt-5 px-6">
-        <div id="overlay" class="overlay">
-            <div class="overlay-content">
-                <img src="{% static 'lanimg/RoomappQR.png' %}" alt="Image">
-                <span class="close-btn" id="closeBtn"><i class="fa-solid fa-xmark text-4xl close-btn-2"></i></span>
-            </div>
-        </div>
-
         <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
             <div>
-                <button id="copyBtn" class="px-1 py-1 bg-gray-500 text-white rounded mb-1 mt-0" style="font-family: 'Courier';">
-                    <i class="fa-regular fa-copy"></i> Copy text</button>
+                <button class="px-1 py-1 bg-gray-500 text-white rounded mb-1 mt-0" style="font-family: 'Courier';">
+                    <i class="fa-regular fa-copy"></i>
+                    <span id="copyBtn">
+                        Copy text
+                    </span>
+                </button>
             </div>
 
-            <textarea id="textBox" class="border border-gray-300 dark:border-gray-600 rounded-lg h-128 p-4 mb-4 w-full bg-white dark:bg-gray-700 text-black dark:text-white"
+            <textarea id="textBox3" class="border border-gray-300 dark:border-gray-600 rounded-lg h-128 p-4 mb-4 w-full bg-white dark:bg-gray-700 text-black dark:text-white"
              placeholder=""></textarea>
              <button id="reloadBtn" class="px-2 py-1 text-white mb-2 reload">&#8634; Reload</button>
 
              <!-- USED FOR LINE BETWEEN FILE SECTION AND TEXT SECTION IN UI. DON'T DELETE -->
 
              <div class="line border-b-2 border-solid border-gray-400"></div>
-             <input type="file" name="lanfile" id="fileinput" multiple>
+
+             <input type="file" class="mt-5 rounded" style="display: none;" id="fileinput" name="lanfile" multiple>
+
             <div id="area">
             </div>
 
-             <button type="submit" id="fileupload" class="px-2 py-1 bg-blue-600 text-white dark:bg-blue-500 rounded mb-3 mt-5 uploadBtn">
+             <button type="submit" id="selectFileBtn" class="px-2 py-1 bg-blue-600 text-white dark:bg-blue-500 rounded mb-3 mt-5 selectBtn"
+             onclick="document.getElementById('fileinput').click()">
+                 Select Files <i class="fa-solid fa-paperclip"></i> 
+            </button>
+            <br>
+
+             <button type="submit" id="fileupload" class="px-2 py-1 bg-green-600 text-white dark:bg-green-600 rounded mb-3 mt-5 uploadBtn"
+                style="display: none;">
                 <i class="fa-solid fa-file-arrow-up mr-1"></i> Upload Files
             </button>
 
@@ -76,7 +77,7 @@
                             <a class="eachfile" href="#" onclick="sendReq('{{file.id}}')">
                                 <span class="_file">- {{ file.name }}</span>
                             </a>
-                            <a href="{% url 'delfile' file.id %}" title="delete this file"><i class="fa-solid fa-trash"></i></a>
+                            <a class="delfile" href="{% url 'delfile' file.id %}" title="delete this file"><i class="fa-solid fa-trash"></i></a>
                         </li>
                     </div>
                     <br>
@@ -109,41 +110,5 @@
             </div>
 
         </div>
-    </main>
 
     {% endblock content %}
-
-   
-    <!-- <div class="container">
-        <img src="{% static 'lanimg/reloading.gif' %}" width="30px" alt="loading" id="loading">
-        <img src="{% static 'lanimg/done.png' %}" width="35x" alt="done" id="done">
-        
-            <button id="copyBtn" class="btn3">Copy text</button>
-            <textarea name="text" rows="20" placeholder="Start Typing!" id="textBox" required></textarea>
-                {% csrf_token %}
-                <input type="hidden" name="addr" id="addr">
-                <input type="file" name="lanfile" id="fileinput" multiple>
-                <div id="area">
-                </div>
-                <div class="buttons">
-                    <button type="submit" id="fileupload" style="padding: 3px;" class="btn">Upload files</button>
-                </div>
-                <div id="waitArea">
-                    <img src="{% static 'lanimg/wait.gif' %}" id="waitImg" width="25px" alt="wait">
-                    <p style="display: inline;">Wait files are being uploaded...</p>
-                </div>
-                <hr>
-                <button type="submit" class="Alldownload" onclick="allFile(fileids)">Download all files</button>
-
-                <div id="lanfiles">
-                    {% for file in files %}
-                    <div class="file3">
-                    <a class="eachfile" href="#" title="Click to download this file" onclick="sendReq('{{file.id}}')">
-                        - {{ file.name }} | 
-                    </a> 
-                    <a class="delfile material-icons" href="{% url 'delfile' file.id %}" title="delete this file">delete</a>
-                    </div>
-                    <br>
-                    {% endfor %}
-                </div>
-        </div> -->

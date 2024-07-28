@@ -99,9 +99,18 @@
     </header>
 
 
+    <main class="container mx-auto mt-5 px-6">
+        <div id="overlay" class="overlay">
+            <div class="overlay-content">
+                <img src="{% static 'lanimg/RoomappQR.png' %}" alt="Image">
+                <span class="close-btn" id="closeBtn"><i class="fa-solid fa-xmark text-4xl close-btn-2"></i></span>
+            </div>
+        </div>
 
     {% block content %}
     {% endblock content %}
+
+    </main>
 
 
     <footer class="bg-white dark:bg-gray-800 shadow mt-8">

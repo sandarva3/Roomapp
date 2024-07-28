@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Focus textBox on loading of Page
     window.onload = () => {
-        document.getElementById('textBox').focus();
+        document.getElementById('textBox3').focus();
     }
 
     const lightSwitches = document.querySelectorAll('.toggle-checkbox');
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //TypeWriting Logic
 function typeWriter(text, callback) {
 let i = 0;
-const textBox = document.getElementById('textBox');
+const textBox = document.getElementById('textBox3');
 textBox.placeholder = ''; // Clear placeholder before typing
 
 function type() {
@@ -83,7 +83,7 @@ function type() {
 };
 
 function goBack(callback) {
-    const textBox = document.getElementById('textBox');
+    const textBox = document.getElementById('textBox3');
     let i = textBox.placeholder.length;
     
     function back() {

@@ -95,7 +95,7 @@ def lan_view(request):
     try:
         data = json.loads(request.body)
         ipAd = data['ipAd']
-        #print(f"IP ADDRESS THIS TIME: {ipAd}")
+        print(f"IP ADDRESS THIS TIME: {ipAd}")
     except:
         pass
     if ipAd != None:
@@ -117,34 +117,3 @@ def lan_view(request):
             return render(request, 'lan/locale.html')
     else:
         return redirect('first')
-
-
-# def lan_view(request):
-#     try:
-#         print("REQUEST MADE AGAIN")
-#         if request.method == "POST":
-#             data = json.loads(request.body)
-#             ipAD = data['ipAd']
-#             print(f"IP: {ipAD}")
-#             return
-#         if ip == None:  
-#             return render(request, 'lan/getip.html')
-#         elif(ip != None):    
-#             print(f"IP IS : {ip}")
-#             try:
-#                 latest = Text.objects.latest('created_at')
-#                 files = Lanfiles.objects.all()
-#                 filesurl = []
-#                 for file in  files:
-#                     file_url = request.build_absolute_uri(file.file.url)
-#                     filesurl.append({'id':file.id, 'name': file, 'url':file_url})
-#                 context = {
-#                     'files': filesurl,
-#                     'latest': latest.texts,
-#                 }
-#                 return render(request, 'lan/locale.html', context)
-#             except Exception as e:
-#                 print(f"Error in getting details: {e}")
-#                 return render(request, 'lan/locale.html')
-#     except Exception as e:
-#         print(f"ERROR : {e}")
