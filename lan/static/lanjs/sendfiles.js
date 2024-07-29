@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 
 uploadBtn.addEventListener('click', () =>{
     uploadBtn.style.display = 'none';
+    document.getElementById('progressContainer').style.display = "block";
     let files = document.getElementById('fileinput').files;
     getIP(files);
 });
@@ -21,7 +22,13 @@ function getIP(files){
 
 
 async function sendFiles(files, ipAddress){
+    let progressBar = document.getElementById('progressBar');
+    progressBar.style.width="0%";
     const _filesPromises = [];
+    const progressPercent = document.getElementById('progressPercent');
+    const totalFiles = files.length;
+    const perFile = (100/totalFiles);
+    let count = 0;
     for(let i=0; i<files.length; i++){
         let formData = new FormData();
         formData.append('file', files[i]);
@@ -33,6 +40,11 @@ async function sendFiles(files, ipAddress){
                 'X-CSRFToken': csrfToken3
             },
             body: formData
+        }).then(response => {
+            count += perFile;
+            progressBar.style.width = `${count}%`;
+            progressPercent.textContent = `${count} %`;
+            console.log("THE COUNT IS: ", count);
         });
         _filesPromises.push(_filePromise);
     }
@@ -40,7 +52,6 @@ async function sendFiles(files, ipAddress){
     try {
         const responses = await Promise.all(_filesPromises);
         console.log("HOGAYA BHAI..");
-        location.reload();
     } catch (error) {
         console.error("NAHI HUA BHAI...", error);
     }
