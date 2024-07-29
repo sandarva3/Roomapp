@@ -40,6 +40,10 @@
     margin-left: 30px;
 }
 
+.copyBtn:hover{
+    background-color: rgb(99, 99, 99);
+}
+
 .close-btn-2{
     font-size: 45px;
 }

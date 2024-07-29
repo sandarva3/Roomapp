@@ -8,10 +8,12 @@ document.addEventListener("DOMContentLoaded", ()=> {
 
     textBox.addEventListener("input", function(){
         console.log("Textbox Triggered");
-
-    const textValue = textBox.value;
-    // checkIP(textValue);
-    debouncedCheckIP(textValue);
+        document.getElementById('spinning').style.display = "inline-block";
+        document.getElementById('done').style.display = "none";
+        const textValue = textBox.value;
+        
+        // checkIP(textValue);
+        debouncedCheckIP(textValue);
 });
 
 
@@ -46,7 +48,7 @@ fileinput.addEventListener('change', function(event){
 
 
 // COPY THE TEXT OF TEXTAREA
-    let copytext = document.getElementById('copyBtn');
+    let copytext = document.getElementById('copyText');
     copytext.addEventListener("click", () => {
     const texts = document.getElementById('textBox3').value;
     navigator.clipboard.writeText(texts).then(() => {
@@ -57,11 +59,6 @@ fileinput.addEventListener('change', function(event){
     }).catch(err => {
         console.error('Failed to copy link: ', err);
     });
-});
-
-
-
-
 });
 
 
@@ -76,24 +73,6 @@ function debounce(func, delay) {
   };
 
 
-
-
-
-
-//GET THE PUBLIC IP ADDRESS
-
-/* async function checkIP(){
-    try{
-        let response = await fetch('https://api.ipify.org?format=json');
-        let data = await response.json();
-        let thisAddress = data.ip;
-        return thisAddress;
-    }
-    catch(error){
-        console.error("THE ERROR: ", error);
-    }
-    
-} */
 
  function checkIP(text){
     console.log("CheckIP TRIGGERD");
@@ -122,9 +101,11 @@ function sendIP(address, text){
     })
     .then( response => response.json() )
     .then(data => {
-        // console.log(data.reply);
-        // console.log(data.network);
-        // console.log(data.device);
-        // console.log(data.latest);
+        document.getElementById('spinning').style.display = "none";
+        document.getElementById('done').style.display = "inline-block";
+        console.log("REPLY", data.reply);
     })
 }
+
+
+});
