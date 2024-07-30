@@ -37,7 +37,7 @@ fileinput.addEventListener('change', function(event){
         filesInArea.push(files[i]);
         let filename = document.createElement('p');
         filename.textContent ='- ' + files[i].name;
-        filename.className = "text-base text-gray-500 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 p-2 rounded-md";
+        filename.className = "text-base text-gray-500 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 dark:hover:text-gray-700 p-2 rounded-md";
         area.appendChild(filename);
     }
     console.log("FILES IN AREA: ", filesInArea);

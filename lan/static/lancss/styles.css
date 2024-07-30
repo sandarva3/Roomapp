@@ -59,8 +59,22 @@
     margin-left: 30px;
 }
 
+.copyBtn {
+    font-family: 'Courier', monospace;
+    padding: 10px 20px;
+    background-color: #1e90ff; /* Blue background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    display: inline-flex;
+    align-items: center;
+}
+
 .copyBtn:hover {
-    background-color: rgb(99, 99, 99);
+    background-color: #1c86ee; /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly larger on hover */
 }
 
 .close-btn-2 {
@@ -79,8 +93,19 @@
     background-color: rgb(0, 150, 0);
 }
 
+.downloadBtn {
+    padding: 10px 20px;
+    background-color: #e74c3c; /* Red background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
 .downloadBtn:hover {
-    background-color: rgb(215, 0, 0);
+    background-color: #e47036; /* Darker red on hover */
+    transform: scale(1.05); /* Slightly larger on hover */
 }
 
 .homeBtn:hover {
@@ -89,6 +114,16 @@
 
 .aboutBtn:hover {
     background-color: rgb(44, 118, 237);
+}
+
+#spinning {
+    color: #3498db; /* Blue color */
+    font-size: 24px; /* Larger size */
+}
+
+#done {
+    color: #2ecc71; /* Green color */
+    font-size: 24px; /* Larger size */
 }
 
 /* .line {
@@ -102,10 +137,18 @@
     align-items: center;
 }
 
-.reload {
-    background-color: rgb(203, 39, 39);
-    border-radius: 6px;
-    box-shadow: 1px 0px 2px gray;
+#reloadBtn {
+    padding: 10px 20px;
+    background-color: #f39c12; /* Orange background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#reloadBtn:hover {
+    background-color: #e67e22; /* Darker orange on hover */
 }
 
 .filesArea {
@@ -226,25 +269,27 @@ textarea:focus {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 #selectFileBtn:hover {
-    background-color: #2980b9; /* Darker blue on hover */
+    background-color: #2380d7; /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly larger on hover */
 }
 
 #fileupload {
     display: none; /* Hide the upload button by default */
     padding: 10px 20px;
     margin-top: 10px;
-    background-color: #27ae60; /* Green background for upload button */
+    background-color:#1a904b; /* Green background for upload button */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 #fileupload:hover {
-    background-color: #1e8449; /* Darker green on hover */
+    transform: scale(1.05); 
+    background-color: #1caf59; /* Darker green on hover */
 }

@@ -44,7 +44,7 @@ async function sendFiles(files, ipAddress){
         }).then(response => {
             count += perFile;
             progressBar.style.width = `${count}%`;
-            progressPercent.innerText = `${count} %`;
+            progressPercent.innerText = `${Math.round(count)} %`;
             console.log("THE COUNT IS: ", count);
         });
         _filesPromises.push(_filePromise);
