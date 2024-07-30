@@ -9,6 +9,7 @@
     <script src="https://kit.fontawesome.com/187b847ba0.js" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="{% static 'lancss/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'lancss/footer.css' %}">
     <script src="{% static 'lanjs/scripts.js' %}"></script>
 
     <script>
@@ -114,21 +115,22 @@
 
 
     <footer class="bg-white dark:bg-gray-800 shadow mt-8">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-sm text-gray-500 dark:text-gray-400">
-                © 2024 Roomapp- share anything instantly. Share Files & text between your devices connected on same wifi/network.
+        <div class="container mx-auto px-6 py-4 flex flex-col justify-center items-center">
+            <div class="text-sm text-gray-500 dark:text-gray-400 text-center mb-2">
+                © 2024 Roomapp - share anything instantly. Share Files & text between your devices connected on the same wifi/network.
                 <br>
                 Shared files are on full original quality and are not compressed.
             </div>
-            <div class="flex space-x-4">
-                <a href="#" class="text-sm text-gray-500 dark:text-gray-400">Privacy Policy</a>
-                <a href="#" class="text-sm text-gray-500 dark:text-gray-400">Contact Us</a>
+            <div class="flex space-x-4 justify-center">
+                <a href="#" class="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 hover:text-blue-600 dark:hover:text-blue-400">Privacy Policy</a>
+                <a href="#" class="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 hover:text-blue-600 dark:hover:text-blue-400">Contact Us</a>
             </div>
         </div>
-        <div class="container mx-auto px-6 py-2 text-center">
-            <span class="text-sm text-gray-500 dark:text-gray-400">Version 1.0.5</span>
+        <div class="container mx-auto px-6 py-2 text-center mt-2 border-t border-gray-200 dark:border-gray-700">
+            <span class="text-sm text-gray-500 dark:text-gray-400">Version 2.0.0</span>
         </div>
     </footer>
+    
     
     {% block js %}
     {% endblock js %}

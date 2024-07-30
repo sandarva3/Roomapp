@@ -103,9 +103,10 @@
     transition: background-color 0.3s, transform 0.3s;
 }
 
+
 .downloadBtn:hover {
-    background-color: #e47036; /* Darker red on hover */
     transform: scale(1.05); /* Slightly larger on hover */
+    background-color: #e47036; /* Darker red on hover */
 }
 
 .homeBtn:hover {
