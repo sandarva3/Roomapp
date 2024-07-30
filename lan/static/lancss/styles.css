@@ -5,7 +5,6 @@
     }
 }
 
-
 .overlay {
     display: none;
     position: fixed;
@@ -39,17 +38,18 @@
     border-radius: 25px;
     overflow: hidden;
     height: 10px;
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 .progress-bar {
     height: 100%;
+    width: 0%;
     background-color: #4caf50;
     text-align: center;
     line-height: 30px;
     color: white;
     border-radius: 25px;
-    transition: width 0.4s ease;
+    transition: width 0.01 linear;
 }
 
 .close-btn {
@@ -59,35 +59,35 @@
     margin-left: 30px;
 }
 
-.copyBtn:hover{
+.copyBtn:hover {
     background-color: rgb(99, 99, 99);
 }
 
-.close-btn-2{
+.close-btn-2 {
     font-size: 45px;
 }
 
-
-.darkBtn:hover{
+.darkBtn:hover {
     background-color: rgb(189, 189, 189);
 }
 
-.selectBtn:hover{
+.selectBtn:hover {
     background-color: blue;
 }
 
-.uploadBtn:hover{
+.uploadBtn:hover {
     background-color: rgb(0, 150, 0);
 }
 
-.downloadBtn:hover{
+.downloadBtn:hover {
     background-color: rgb(215, 0, 0);
 }
 
-.homeBtn:hover{
+.homeBtn:hover {
     background-color: rgb(44, 118, 237);
 }
-.aboutBtn:hover{
+
+.aboutBtn:hover {
     background-color: rgb(44, 118, 237);
 }
 
@@ -97,7 +97,7 @@
     margin: 0px;
 } */
 
-.aboutContent{
+.aboutContent {
     text-align: center;
     align-items: center;
 }
@@ -107,38 +107,144 @@
     border-radius: 6px;
     box-shadow: 1px 0px 2px gray;
 }
-.filesTitle {
-    font-family: sans-serif;
+
+.filesArea {
+    background-color: #f9fafb; /* Light background for better contrast */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-.delfile{
-text-decoration: none;
-color: red;
-visibility: hidden;
-margin-left: 50px;
+.filesTitle {
+    font-family: 'Arial', sans-serif; /* More modern font */
+    color: #2c3e50; /* Darker color for better readability */
 }
-.file3{
-margin: 5px;
-display: inline-block;
+
+.delfile {
+    text-decoration: none;
+    color: #e74c3c; /* Red color for delete icon */
+    visibility: hidden;
+    margin-left: 20px;
 }
-.file3:hover .delfile{
+
+.file3 {
+    margin: 5px;
+    display: inline-block;
+    border-bottom: 1px solid #e5e7eb; /* Light gray border */
+    padding: 10px; /* Add some padding */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+.file3:hover .delfile {
     visibility: visible;
 }
-.file3:hover{
-    border-bottom: 1px solid;
+
+.file3:hover {
+    background-color: #e0f7fa; /* Light blue background on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
 }
-.italicText{
+
+.italicText {
     padding: 0px;
-    color: gray;
+    color: #95a5a6; /* Slightly darker gray for better readability */
     font-size: smaller;
     font-weight: lighter;
 }
-textarea:focus{
+
+textarea:focus {
     outline-color: rgb(113, 163, 255);
 }
-.shareBtn{
+
+.eachFile {
+    text-decoration: none;
+    color: #3498db; /* Blue color for links */
+    font-weight: bold;
+}
+
+.eachFile:hover {
+    text-decoration: underline;
+}
+
+.shareBtn {
     background-color: rgb(95, 45, 203);
 }
-.shareBtn:hover{
+
+.shareBtn:hover {
     background-color: rgb(80, 27, 193)
+}
+
+/* Add a border radius for better visuals */
+.filesArea, .file3, .progress-bar-container, .overlay-content img {
+    border-radius: 10px;
+}
+
+/* Additional spacing and alignment */
+.list-disc {
+    padding-left: 20px; /* More padding for the list */
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.selectedFiles {
+    padding: 10px;
+    border: 2px dashed #3498db; /* Dashed border to indicate file area */
+    border-radius: 10px;
+    background-color: #f9fafb;
+    margin-top: 10px;
+}
+
+.selectedFiles p {
+    color: #2c3e50; /* Darker color for text */
+    margin: 5px 0;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #ecf0f1; /* Light background for file names */
+    transition: transform 0.3s;
+}
+
+.selectedFiles p:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    background-color: #bdd2d5; /* Light blue background on hover */
+}
+
+#fileinput {
+    display: none; /* Hide the file input by default */
+}
+
+#selectFileBtn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #3498db; /* Blue background for select button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#selectFileBtn:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+#fileupload {
+    display: none; /* Hide the upload button by default */
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #27ae60; /* Green background for upload button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#fileupload:hover {
+    background-color: #1e8449; /* Darker green on hover */
 }

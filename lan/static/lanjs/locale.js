@@ -22,6 +22,7 @@ console.log("FILES IN AREAA AAA");
 
 let fileinput = document.getElementById('fileinput');
 fileinput.addEventListener('change', function(event){
+    document.getElementById('area').style.display = "block";
     document.getElementById('fileinput').style.display = "inline-block";
     document.getElementById('selectFileBtn').style.display = "none";
     document.getElementById('fileupload').style.display = "inline";
@@ -36,9 +37,7 @@ fileinput.addEventListener('change', function(event){
         filesInArea.push(files[i]);
         let filename = document.createElement('p');
         filename.textContent ='- ' + files[i].name;
-        filename.style.color = 'gray';
-        filename.style.margin = '5px';
-        filename.style.fontSize = '15px';
+        filename.className = "text-base text-gray-500 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 p-2 rounded-md";
         area.appendChild(filename);
     }
     console.log("FILES IN AREA: ", filesInArea);

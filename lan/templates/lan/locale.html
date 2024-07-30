@@ -39,8 +39,8 @@
                         Copy text
                     </span>
                 </button>
-                <i id="spinning" style="display: none;" class="p-0 ml-3 fa-solid fa-rotate text-2xl text-gray-600 fa-spin"></i>
-                <i id="done" style="display: none;" class="p-0 ml-3 fa-solid fa-check text-green-600 text-3xl"></i>
+                <i id="spinning" style="display: none;" class="p-0 ml-3 fa-solid fa-rotate text-2xl fa-spin text-gray-600 dark:text-gray-300 "></i>
+                <i id="done" style="display: none;" class="p-0 ml-3 fa-solid fa-check text-green-600 text-3xl dark:text-green-300"></i>
             </div>
 
             <textarea id="textBox3" class="border border-gray-300 dark:border-gray-600 rounded-lg h-128 p-4 mb-4 w-full bg-white dark:bg-gray-700 text-black dark:text-white"
@@ -53,28 +53,31 @@
 
              <input type="file" class="mt-5 rounded" style="display: none;" id="fileinput" name="lanfile" multiple>
 
-            <div id="area">
+            <div id="area" class="dark:bg-gray-800 selectedFiles" style="display: none;">
             </div>
 
              <button type="submit" id="selectFileBtn" class="px-2 py-1 bg-blue-600 text-white dark:bg-blue-500 rounded mb-3 mt-5 selectBtn"
              onclick="document.getElementById('fileinput').click()">
                  Select Files <i class="fa-solid fa-paperclip"></i> 
             </button>
-            <br>
 
              <button type="submit" id="fileupload" class="px-2 py-1 bg-green-600 text-white dark:bg-green-600 rounded mb-3 mt-5 uploadBtn"
                 style="display: none;">
                 <i class="fa-solid fa-file-arrow-up mr-1"></i> Upload Files
             </button>
 
-
-            <div class="progress-bar-container" id="progressContainer" style="display: none;">
-                <div class="progress-bar" id="progressBar"></div><span id="progressPercent"> 0%</span>
-            </div>
             
+            <!-- PROGRESS BAR -->
+             <div id="progressSection" style="display: none;">
+                <p>Wait files are being uploaded: <i id="progressPercent"></i></p>
+                <div class="progress-bar-container" id="progressContainer">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+             </div>
 
-            <div id="lanfiles" class="filesArea border border-gray-300 dark:border-gray-600 rounded-lg p-4">
-                <div class="text-lg font-bold mb-5 filesTitle">Files in the Room<i class="italicText">(Click to download)</i>:</div>
+
+            <div id="lanfiles" class="filesArea border border-gray-300 dark:border-gray-600 dark:bg-gray-800 mt-5 rounded-lg p-4">
+                <div class="text-lg font-bold mb-5 filesTitle dark:text-white">Files in the Room<i class="italicText">(Click to download)</i>:</div>
                 <ul class="list-disc list-inside space-y-2">
                     {% for file in files %}
                     <div class="file3">

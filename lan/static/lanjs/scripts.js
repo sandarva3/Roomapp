@@ -66,7 +66,6 @@ function goBack(callback) {
 
 const texts = [
     'Type here...',
-    'Hello World..',
     'Scroll down for Files..',
 ];
 
