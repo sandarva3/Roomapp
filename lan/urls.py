@@ -10,6 +10,7 @@ from .views import(
     lanAjax_view,
     first_view,
     about_view,
+    removeAllFiles_view,
 )
 
 urlpatterns = [
@@ -20,6 +21,7 @@ urlpatterns = [
     path('del/<int:id>', delFile_view, name='delfile'),
     path('lanEndpoint', lanAjax_view, name='lanAjax'),
     path('about/', about_view, name='about'),
+    path('removeAll/', removeAllFiles_view, name='removeAll'),
 ]
 
 if settings.DEBUG:

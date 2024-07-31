@@ -9,6 +9,8 @@
         const lanAjaxUrl = "{% url 'lanAjax' %}";
         const latest = "{{ latest|escapejs }}";
         const fileURL = "{% url 'lanfiles' %}";
+        const removeAll_Url = "{% url 'removeAll' %}";
+
         let fileids = [];
         "{% for file in files %}"
         fileids.push('{{ file.id }}');
@@ -24,8 +26,34 @@
         document.addEventListener("DOMContentLoaded", () => {
             document.getElementById('textBox3').value = latest;
         });
+
+    function getIP2(){
+        document.getElementById('deleteBtn').innerText = "Wait. deleting all files.."
+        fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+            removeAll(data.ip);
+        })
+        .catch(error => {
+            console.log('Error:', error);
+        });
+};
+
+        function removeAll(ip){
+            fetch(removeAll_Url, {
+            method : "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken3,
+            },
+            body: JSON.stringify({
+                'ip':ip,
+            })
+            })
+            .then( location.reload() );
+};
+
     </script>
-    
     {% endblock jstop %}
 
 
@@ -79,6 +107,13 @@
             <div id="lanfiles" class="filesArea border border-gray-300 dark:border-gray-600 dark:bg-gray-800 mt-5 rounded-lg p-4">
                 <div class="text-lg font-bold mb-5 filesTitle dark:text-white">Files in the Room<i class="italicText">(Click to download)</i>:</div>
                 <ul class="list-disc list-inside space-y-2">
+                    {% if files|length == 0 %}
+                            <p class="no-files-text text-gray-500 dark:text-gray-400">
+                                Currently there are No files in the Room.
+                                <span style="text-decoration: underline; cursor: pointer;" onclick="document.getElementById('fileinput').click()">Upload some files</span>
+                                to be shown here.
+                            </p>
+                    {% else %}
                     {% for file in files %}
                     <div class="file3">
                         <li class="flex justify-between items-center">
@@ -90,17 +125,28 @@
                     </div>
                     <br>
                     {% endfor %}
+                    {% endif %}
                 </ul>
             </div>
-    
-            <button class="px-2 py-1 bg-orange-700 text-white rounded mt-3 downloadBtn" onclick="allFile(fileids)">
-                <i class="fa-solid fa-file-arrow-down mr-1"></i> Download all Files
-            </button>
-            <div class="flex justify-between items-center mt-4">
 
+
+            <div>
+                <button class="px-2 py-1 bg-orange-700 text-white rounded mt-3 downloadBtn" onclick="allFile(fileids)">
+                    <i class="fa-solid fa-file-arrow-down mr-1"></i> Download all Files
+                </button>
+                {% if files|length >= 10 %}
+                <button id="deleteBtn" class="float-right px-2 py-1 bg-red-600 text-white rounded deleteBtn mt-3 ml-2" onclick="getIP2()">
+                    <i class="fa-solid fa-trash mr-1"></i> delete all files
+                </button>
+                {% endif %}
+                
+            </div>
+            
+            <div class="flex justify-between items-center mt-4">
                 <!-- JUST here to create a gap. Don't remove below div element blindly -->
                 <div>
                 </div>
+                
 
                 <div class="flex space-x-2">
                     <button class="px-4 py-2 text-white rounded shareBtn">

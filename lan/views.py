@@ -29,6 +29,17 @@ def lanAjax_view(request):
         return JsonResponse({'error':'Data not received'}, status=400)
 
 
+def removeAllFiles_view(request):
+    if (request.method == "POST"):
+        data = json.loads(request.body)
+        IP = data['ip']
+        files = Lanfiles.objects.filter(Faddress=IP)
+        for file in files:
+            file.delete()
+
+        return JsonResponse(1, safe=False)
+
+
 def about_view(request):
     return render(request, 'lan/about.html')
 
