@@ -18,9 +18,9 @@
         console.log('FILE IDS ARRAY: ', fileids);
     </script>
 
+    <script src="{% static 'lanjs/locale.js' %}"></script>
     <script src="{% static 'lanjs/getlan.js' %}"></script>  
     <script src="{% static 'lanjs/sendfiles.js' %}"></script>  
-    <script src="{% static 'lanjs/locale.js' %}"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -116,7 +116,7 @@
                     {% else %}
                     {% for file in files %}
                     <div class="file3">
-                        <li class="flex justify-between items-center">
+                        <li class="eachFileRow flex justify-between items-center">
                             <a class="eachFile" href="#" onclick="sendReq('{{file.id}}')">
                                 <span class="_file">- {{ file.name }}</span>
                             </a>

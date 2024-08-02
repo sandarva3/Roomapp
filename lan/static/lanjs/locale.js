@@ -81,7 +81,7 @@ function debounce(func, delay) {
         sendIP(data.ip, text);
     })
     .catch(error => {
-        console.log('Error:', error);
+        console.error('Error:', error);
     });
 };
 

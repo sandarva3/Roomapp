@@ -68,3 +68,17 @@ footer .flex a.dark\:text-gray-400:hover {
 footer .container.mx-auto.px-6.py-2.text-center.dark\:text-gray-400 span {
     color: #9ca3af; /* Lighter gray for version text in night mode */
 }
+
+/* Media Queries */
+@media (max-width: 640px) {
+    footer .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer .flex {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
