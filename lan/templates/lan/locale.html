@@ -27,8 +27,8 @@
             document.getElementById('textBox3').value = latest;
         });
 
-    function getIP2(){
-        document.getElementById('deleteBtn').innerText = "Wait. deleting all files.."
+    function getIP2(elemetnId){
+        document.getElementById(elemetnId).innerText = "Wait. deleting all files.."
         fetch('https://api.ipify.org?format=json')
         .then(response => response.json())
         .then(data => {
@@ -37,9 +37,9 @@
         .catch(error => {
             console.log('Error:', error);
         });
-};
+}
 
-        function removeAll(ip){
+    function removeAll(ip){
             fetch(removeAll_Url, {
             method : "POST",
             headers: {
@@ -135,7 +135,7 @@
                     <i class="fa-solid fa-file-arrow-down mr-1"></i> Download all Files
                 </button>
                 {% if files|length >= 10 %}
-                <button id="deleteBtn" class="float-right px-2 py-1 bg-red-600 text-white rounded deleteBtn mt-3 ml-2" onclick="getIP2()">
+                <button id="deleteBtn" class="float-right px-2 py-1 bg-red-600 text-white rounded deleteBtn mt-3 ml-2" onclick="getIP2('deleteBtn')">
                     <i class="fa-solid fa-trash mr-1"></i> delete all files
                 </button>
                 {% endif %}
@@ -162,6 +162,13 @@
                 </div>
 
             </div>
+            {% if files|length >= 10 %}
+            <div class="deleteBtnContainer">
+                <button id="deleteBtn2" class="px-2 py-1 bg-red-600 text-white rounded deleteBtn mt-3 ml-2" onclick="getIP2('deleteBtn2')">
+                    <i class="fa-solid fa-trash mr-1"></i> delete all files
+                </button>
+            </div>
+            {% endif %}
 
         </div>
 

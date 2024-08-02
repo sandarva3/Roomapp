@@ -244,10 +244,6 @@ textarea:focus {
     padding-left: 20px; /* More padding for the list */
 }
 
-.flex {
-    display: flex;
-    align-items: center;
-}
 
 .items-center {
     align-items: center;
@@ -259,6 +255,9 @@ textarea:focus {
     border-radius: 10px;
     background-color: #f9fafb;
     margin-top: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 .selectedFiles p {
@@ -312,6 +311,12 @@ textarea:focus {
 #fileupload:hover {
     transform: scale(1.05); 
     background-color: #1caf59; /* Darker green on hover */
+}
+
+@media (min-width: 641px) {
+    #deleteBtn2{
+        display: none;
+    }
 }
 
 /* Media Queries */
@@ -374,4 +379,12 @@ textarea:focus {
         width: 100%;
     }
     
+    .deleteBtnContainer {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 35px;
+    }
+    #deleteBtn{
+        display: none;
+    }
 }
