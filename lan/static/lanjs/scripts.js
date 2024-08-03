@@ -103,12 +103,4 @@ document.getElementById('tweetBtn').onclick = () =>{
 }
 
 
-document.getElementById('friendBtn').addEventListener('click', function() {
-    document.getElementById('overlay').style.display = 'flex';
-});
-
-document.getElementById('closeBtn').addEventListener('click', function() {
-    document.getElementById('overlay').style.display = 'none';
-});
-
 });

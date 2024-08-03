@@ -1,19 +1,76 @@
 {% extends "base.html" %}
 {% load static %}
 
-
-
 {% block content %}
-
-<div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 aboutContent flex justify-center">
-
-    <div class="aboutContent2 w-96">
-        <span class="border-b border-gray-500 dark:border-white text-5xl">FAQ</span>
-        <br><br>
-        <p>
-            Welcome to the FAQ page.
-        </p>
+<div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 faqContent">
+    <div class="text-center">
+        <h1 class="text-5xl dark:border-white mb-4">
+            <span class="border-b border-gray-500">FAQ</span>
+        </h1>
+        <p>Welcome to the FAQ page. Here you will find answers to the most commonly asked questions.</p>
     </div>
-</div>
 
+    <div class="mt-6">
+        <button class="faqQuestion" >
+            <span>What is Roomapp?</span>
+            <i class="fa fa-chevron-down"></i>
+        </button>
+        <div class="faqAnswer hidden">
+            <p>Roomapp is a seamless sharing platform that allows you to share files and text between devices connected to the same Wi-Fi or network.</p>
+        </div>
+    </div>
+
+    <div class="mt-6">
+        <button class="faqQuestion" >
+            <span>How does it work?</span>
+            <i class="fa fa-chevron-down"></i>
+        </button>
+        <div class="faqAnswer hidden">
+            <p>You can upload files or type text in the Room. Any device connected to the same Wi-Fi or network can access these files and text.</p>
+        </div>
+    </div>
+
+    <div class="mt-6">
+        <button class="faqQuestion" >
+            <span>Is my data secure?</span>
+            <i class="fa fa-chevron-down"></i>
+        </button>
+        <div class="faqAnswer hidden">
+            <p>Yes, all shared files are in their original quality and are not compressed, ensuring your data is safe and secure.</p>
+        </div>
+    </div>
+
+</div>
 {% endblock content %}
+
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'lan/faq.css' %}">
+{% endblock css %}
+
+
+{% block js %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const questions = document.querySelectorAll(".faqQuestion");
+        questions.forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                if (answer.className === "faqAnswer hidden") {
+                    answer.className = "faqAnswer block";
+                    icon.className = "fa fa-chevron-up";
+                } else {
+                    answer.className = "faqAnswer hidden";
+                    icon.className = "fa fa-chevron-down";
+                }
+            });
+        });
+    });
+</script>
+
+
+{% endblock js %}
