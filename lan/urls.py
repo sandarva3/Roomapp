@@ -11,6 +11,7 @@ from .views import(
     first_view,
     about_view,
     removeAllFiles_view,
+    faq_view,
 )
 
 urlpatterns = [
@@ -22,6 +23,7 @@ urlpatterns = [
     path('lanEndpoint', lanAjax_view, name='lanAjax'),
     path('about/', about_view, name='about'),
     path('removeAll/', removeAllFiles_view, name='removeAll'),
+    path('faq/', faq_view, name='faq'),
 ]
 
 if settings.DEBUG:

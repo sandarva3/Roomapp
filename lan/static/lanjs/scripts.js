@@ -111,20 +111,4 @@ document.getElementById('closeBtn').addEventListener('click', function() {
     document.getElementById('overlay').style.display = 'none';
 });
 
-
-
-const supportButton = document.getElementById('support-button');
-            const supportDropdown = document.getElementById('support-dropdown');
-
-            supportButton.addEventListener('click', () => {
-                supportDropdown.classList.toggle('hidden');
-            });
-
-            // Close dropdown if clicked outside
-            document.addEventListener('click', (event) => {
-                if (!supportButton.contains(event.target) && !supportDropdown.contains(event.target)) {
-                    supportDropdown.classList.add('hidden');
-                }
-            });
-
 });

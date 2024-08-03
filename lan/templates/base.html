@@ -47,10 +47,24 @@
         }
         return cookieValue;
     }
-    
     const csrfToken3 = getCookie('csrftoken');
-    
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const supportButton = document.getElementById('support-button');
+        const supportDropdown = document.getElementById('support-dropdown');
+        supportButton.addEventListener('click', () => {
+            supportDropdown.classList.toggle('hidden');
+        });
+        // Close dropdown if clicked outside
+        document.addEventListener('click', (event) => {
+            if (!supportButton.contains(event.target) && !supportDropdown.contains(event.target)) {
+                supportDropdown.classList.add('hidden');
+            }
+        });
+    })
+
     </script>
+
     {% block jstop %}
     {% endblock jstop %}
 
@@ -87,7 +101,7 @@
                 <div class="relative">
                     <button id="support-button" class="text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">Support <i class="fa fa-caret-down"></i></button>
                     <div id="support-dropdown" class="absolute hidden bg-white dark:bg-gray-800 shadow-md mt-2 py-2 w-48">
-                        <a href="#" class="block px-4 py-2 text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">FAQ</a>
+                        <a href="{% url 'faq' %}" class="block px-4 py-2 text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">FAQ</a>
                         <a href="#" class="block px-4 py-2 text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">Contact</a>
                     </div>
                 </div>
@@ -114,8 +128,8 @@
             </div>
         </div>
 
-    {% block content %}
-    {% endblock content %}
+        {% block content %}
+        {% endblock content %}
 
     </main>
 

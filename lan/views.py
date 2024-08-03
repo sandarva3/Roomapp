@@ -29,6 +29,10 @@ def lanAjax_view(request):
         return JsonResponse({'error':'Data not received'}, status=400)
 
 
+def faq_view(request):
+    return render(request, 'lan/faq.html')
+
+
 def removeAllFiles_view(request):
     if (request.method == "POST"):
         data = json.loads(request.body)
