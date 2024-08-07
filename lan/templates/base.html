@@ -8,6 +8,7 @@
 
     <script src="https://kit.fontawesome.com/187b847ba0.js" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="{% static 'lanimg/Roomapp.png' %}">
     <link rel="stylesheet" href="{% static 'lancss/styles.css' %}">
     <link rel="stylesheet" href="{% static 'lancss/footer.css' %}">
     <script src="{% static 'lanjs/scripts.js' %}"></script>
@@ -27,6 +28,18 @@
             }
         }
     </script>
+
+<style>
+    .open span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .open span:nth-child(2) {
+        opacity: 0;
+    }
+    .open span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+</style>
 
     {% block css %}
     {% endblock css %}
@@ -90,9 +103,15 @@
                     <i class="ml-3 dark:text-gray-300 text-sm sm:text-base block sm:inline">Share anything Instantly</i>
                 </div>
                 <div class="block sm:hidden">
-                    <button id="mobile-menu-button" class="text-gray-900 dark:text-gray-300">
-                        <i class="fa fa-bars"></i>
-                    </button>
+                        <div class="relative">
+                            <button id="menu-toggle" class="focus:outline-none">
+                                <div id="menu-icon" class="space-y-2">
+                                    <span class="block w-8 h-0.5 bg-gray-600 transform transition duration-300"></span>
+                                    <span class="block w-8 h-0.5 bg-gray-600 transform transition duration-300"></span>
+                                    <span class="block w-8 h-0.5 bg-gray-600 transform transition duration-300"></span>
+                                </div>
+                            </button>
+                        </div>
                 </div>
             </div>
             <nav id="mobile-menu" class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 space-x-0 sm:space-x-8 w-full sm:w-auto hidden sm:flex hide">
@@ -145,7 +164,7 @@
     <footer class="bg-white dark:bg-gray-800 shadow mt-8">
         <div class="container mx-auto px-6 py-4 flex flex-col justify-center items-center">
             <div class="text-sm text-gray-500 dark:text-gray-400 text-center mb-2">
-                © 2024 Roomapp - share anything instantly. Share Files & text between your devices connected on the same wifi/network.
+                © 2024 Roomapp - share anything instantly. Share Text & Files between your devices connected on the same wifi/network.
                 <br>
                 Shared files are on full original quality and are not compressed.
             </div>
@@ -159,18 +178,21 @@
         </div>
     </footer>
     
+    
     <script>
-    document.getElementById('mobile-menu-button').addEventListener('click', function() {
-    var mobileMenu = document.getElementById('mobile-menu');
-    if (mobileMenu.classList.contains('show')) {
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      var mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenu.classList.contains('show')) {
         mobileMenu.classList.remove('show');
         mobileMenu.classList.add('hide');
-    } else {
+      } else {
         mobileMenu.classList.remove('hide');
         mobileMenu.classList.add('show');
-    }
-});
-    </script>
+      }
+    });
+  });
+</script>
     
     {% block js %}
     {% endblock js %}

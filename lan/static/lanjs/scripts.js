@@ -26,6 +26,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
             });
+
+
+//Menu-bar to Cross button Hamburger logic
+const menuToggle = document.getElementById('menu-toggle');
+const menuIcon = document.getElementById('menu-icon');
+
+menuToggle.addEventListener('click', () => {
+    menuIcon.classList.toggle('open');
+});
     
     
 //TypeWriting Logic
