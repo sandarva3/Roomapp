@@ -7,7 +7,8 @@
     <title>Roomapp</title>
 
     <script src="https://kit.fontawesome.com/187b847ba0.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="{% static 'lancss/tailwind.css' %}">
     <link rel="icon" href="{% static 'lanimg/Roomapp.png' %}">
     <link rel="stylesheet" href="{% static 'lancss/styles.css' %}">
     <link rel="stylesheet" href="{% static 'lancss/footer.css' %}">
@@ -62,33 +63,13 @@
     }
     const csrfToken3 = getCookie('csrftoken');
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const supportButton = document.getElementById('support-button');
-        const supportDropdown = document.getElementById('support-dropdown');
-        supportButton.addEventListener('click', () => {
-            supportDropdown.classList.toggle('hidden');
-        });
-        // Close dropdown if clicked outside
-        document.addEventListener('click', (event) => {
-            if (!supportButton.contains(event.target) && !supportDropdown.contains(event.target)) {
-                supportDropdown.classList.add('hidden');
-            }
-        });
-        document.getElementById('friendBtn').addEventListener('click', function() {
-        document.getElementById('overlay').style.display = 'flex';
-        });
-        
-        document.getElementById('closeBtn').addEventListener('click', function() {
-            document.getElementById('overlay').style.display = 'none';
-        });
-    })
-
     </script>
 
     {% block jstop %}
     {% endblock jstop %}
 
 </head>
+
 
 
 <body class="bg-gray-100 text-black dark:bg-gray-900 dark:text-white font-sans leading-normal tracking-normal">
@@ -181,6 +162,26 @@
     
     <script>
   document.addEventListener("DOMContentLoaded", () => {
+
+        const supportButton = document.getElementById('support-button');
+        const supportDropdown = document.getElementById('support-dropdown');
+        supportButton.addEventListener('click', () => {
+            supportDropdown.classList.toggle('hidden');
+        });
+        // Close dropdown if clicked outside
+        document.addEventListener('click', (event) => {
+            if (!supportButton.contains(event.target) && !supportDropdown.contains(event.target)) {
+                supportDropdown.classList.add('hidden');
+            }
+        });
+        document.getElementById('friendBtn').addEventListener('click', function() {
+        document.getElementById('overlay').style.display = 'flex';
+        });
+        
+        document.getElementById('closeBtn').addEventListener('click', function() {
+            document.getElementById('overlay').style.display = 'none';
+        });
+
     document.getElementById('menu-toggle').addEventListener('click', function() {
       var mobileMenu = document.getElementById('mobile-menu');
       if (mobileMenu.classList.contains('show')) {
