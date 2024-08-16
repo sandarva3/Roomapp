@@ -349,12 +349,11 @@ textarea:focus {
     
     #mobile-menu.show {
         display: flex !important; /* Ensure flex display for animation */
-        animation: slideIn 0.3s ease-in-out forwards;
+        animation: slideIn 1s ease-in-out forwards;
     }
     
     #mobile-menu.hide {
-        animation: slideOut 0.3s ease-in-out forwards;
-        display: none;
+        animation: slideOut 1s ease-in-out forwards;
     }
 
     header .container {
