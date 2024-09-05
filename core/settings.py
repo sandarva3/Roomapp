@@ -27,14 +27,13 @@ SECRET_KEY = 'django-insecure-j3&+9e-=3fh-q3w2oms!ytnb2re)g+q&oe8w7!#==x*47x5w9o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['roomapp.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'lan',
-    'django_apscheduler',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -121,10 +120,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 
-#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'lan/static')]
-STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # This points to lan/static
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # This is where collectstatic will place all static files
+STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

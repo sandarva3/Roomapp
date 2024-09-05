@@ -1,0 +1,400 @@
+@layer utilities {
+    .header {
+        content-visibility: auto;
+        font-family: 'Courier New', Courier, monospace;
+    }
+}
+
+
+.progress-bar-container {
+    width: 100%;
+    background-color: #d7d7d7;
+    border-radius: 25px;
+    overflow: hidden;
+    height: 10px;
+    margin: 10px 0;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #4caf50;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    border-radius: 25px;
+    transition: width 0.01 linear;
+}
+
+
+.copyBtn {
+    font-family: 'Courier', monospace;
+    padding: 10px 20px;
+    background-color: #1e90ff; /* Blue background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    display: inline-flex;
+    align-items: center;
+}
+
+.copyBtn:hover {
+    background-color: #1c86ee; /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly larger on hover */
+}
+
+.close-btn-2 {
+    font-size: 45px;
+}
+
+.darkBtn:hover {
+    background-color: rgb(189, 189, 189);
+}
+
+.selectBtn:hover {
+    background-color: blue;
+}
+
+.uploadBtn:hover {
+    background-color: rgb(0, 150, 0);
+}
+
+/* Styling for Delete Button */
+.deleteBtn {
+    background-color: #e74c3c; /* Red background for delete button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.5s, transform 0.3s;
+    opacity: 0.5; /* Slightly faded */
+}
+
+.deleteBtn:hover {
+    background-color: #c0392b; /* Darker red on hover */
+    transform: scale(1.03); /* Slightly larger on hover */
+    opacity: 1; /* Fully visible on hover */
+}
+
+.deleteBtn:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 0 3px rgba(209, 71, 55, 0.4); /* Custom focus outline */
+}
+
+
+.downloadBtn {
+    padding: 10px 20px;
+    background-color: #e74c3c; /* Red background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.downloadBtn:hover {
+    transform: scale(1.05); /* Slightly larger on hover */
+    background-color: #e47036; /* Darker red on hover */
+}
+
+.homeBtn:hover {
+    background-color: rgb(44, 118, 237);
+}
+
+.aboutBtn:hover {
+    background-color: rgb(44, 118, 237);
+}
+
+#spinning {
+    color: #3498db; /* Blue color */
+    font-size: 24px; /* Larger size */
+}
+
+#done {
+    color: #2ecc71; /* Green color */
+    font-size: 24px; /* Larger size */
+}
+
+.aboutContent {
+    text-align: center;
+    align-items: center;
+}
+
+#reloadBtn {
+    padding: 10px 20px;
+    background-color: #f39c12; /* Orange background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#reloadBtn:hover {
+    background-color: #e67e22; /* Darker orange on hover */
+}
+
+.filesArea {
+    background-color: #f9fafb; /* Light background for better contrast */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.filesTitle {
+    font-family: 'Arial', sans-serif; /* More modern font */
+    color: #2c3e50; /* Darker color for better readability */
+}
+
+.delfile {
+    text-decoration: none;
+    color: #e74c3c; /* Red color for delete icon */
+    visibility: hidden;
+    margin-left: 20px;
+}
+
+.file3 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    margin: 5px;
+    display: inline-block;
+    border-bottom: 1px solid #e5e7eb; /* Light gray border */
+    padding: 10px; /* Add some padding */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+.file3:hover .delfile {
+    visibility: visible;
+}
+
+.file3:hover {
+    background-color: #e0f7fa; /* Light blue background on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.italicText {
+    padding: 0px;
+    color: #95a5a6; /* Slightly darker gray for better readability */
+    font-size: smaller;
+    font-weight: lighter;
+}
+
+textarea:focus {
+    outline-color: rgb(113, 163, 255);
+}
+
+.eachFile {
+    text-decoration: none;
+    color: #3498db; /* Blue color for links */
+    font-weight: bold;
+}
+
+.eachFile:hover {
+    text-decoration: underline;
+}
+
+.shareBtn {
+    background-color: rgb(95, 45, 203);
+}
+
+.shareBtn:hover {
+    background-color: rgb(80, 27, 193)
+}
+
+/* Add a border radius for better visuals */
+.filesArea, .file3, .progress-bar-container, .overlay-content img {
+    border-radius: 10px;
+}
+
+/* Additional spacing and alignment */
+.list-disc {
+    padding-left: 20px; /* More padding for the list */
+}
+
+
+.items-center {
+    align-items: center;
+}
+
+.selectedFiles {
+    padding: 10px;
+    border: 2px dashed #3498db; /* Dashed border to indicate file area */
+    border-radius: 10px;
+    background-color: #f9fafb;
+    margin-top: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+.selectedFiles p {
+    color: #2c3e50; /* Darker color for text */
+    margin: 5px 0;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #ecf0f1; /* Light background for file names */
+    transition: transform 0.3s;
+}
+
+.selectedFiles p:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    background-color: #bdd2d5; /* Light blue background on hover */
+}
+
+#fileinput {
+    display: none; /* Hide the file input by default */
+}
+
+#selectFileBtn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #3498db; /* Blue background for select button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#selectFileBtn:hover {
+    background-color: #2380d7; /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly larger on hover */
+}
+
+#fileupload {
+    display: none; /* Hide the upload button by default */
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color:#1a904b; /* Green background for upload button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#fileupload:hover {
+    transform: scale(1.05); 
+    background-color: #1caf59; /* Darker green on hover */
+}
+
+@media (min-width: 641px) {
+    #deleteBtn2{
+        display: none;
+    }
+}
+
+/* Media Queries */
+@media (max-width: 640px) {
+    .flex-wrap {
+        flex-wrap: wrap;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes slideOut {
+        from {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+    }
+    
+    #mobile-menu.show {
+        display: flex !important; /* Ensure flex display for animation */
+        animation: slideIn 1s ease-in-out forwards;
+    }
+    
+    #mobile-menu.hide {
+        animation: slideOut 1s ease-in-out forwards;
+    }
+
+    header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a {
+        margin-top: 8px;
+    }
+
+    .justify-between {
+        justify-content: center;
+    }
+
+    .items-center {
+        justify-content: center;
+    }
+
+    .w-56 {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    /* Make logo responsive */
+    .logo {
+        max-width: 250px;
+        width: 100%;
+    }
+
+    /* Center text under logo */
+    .logo + i {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    /* Make the dropdown button full width */
+    .relative {
+        width: 100%;
+    }
+
+    .relative > button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .relative > div {
+        width: 100%;
+        z-index: 1000; /* Ensure dropdown is above other elements */
+        position: relative;
+    }
+
+    .deleteBtnContainer {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 35px;
+    }
+    #deleteBtn {
+        display: none;
+    }
+
+    /* Adjust the position of the toggle switch */
+    .toggle-label {
+        z-index: 999; /* Ensure toggle switch stays above other elements but below the dropdown */
+    }
+
+    .night-mode-toggle {
+        order: 10; /* Ensure it is placed at the bottom in the nav */
+    }
+}

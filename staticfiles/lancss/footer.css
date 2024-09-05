@@ -1,0 +1,84 @@
+footer {
+    border-top: 1px solid #e5e7eb; /* Light border at the top */
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+footer .container > div {
+    width: 100%;
+    max-width: 1200px;
+    padding: 10px 20px;
+}
+
+footer .text-sm {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+footer .flex {
+    justify-content: center;
+}
+
+footer .flex a {
+    padding: 8px 12px;
+    background-color: #f1f5f9; /* Light background for links */
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+footer .flex a:hover {
+    background-color: #e2e8f0; /* Slightly darker background on hover */
+    color: #1e3a8a; /* Dark blue color on hover */
+}
+
+footer .container.mx-auto.px-6.py-2.text-center {
+    margin-top: 10px;
+    border-top: 1px solid #e5e7eb; /* Light border at the top */
+    padding-top: 10px;
+}
+
+footer .container.mx-auto.px-6.py-2.text-center span {
+    color: #6b7280; /* Slightly darker gray for version text */
+}
+
+/* Dark mode adjustments */
+footer.bg-white.dark\:bg-gray-800 {
+    background-color: #1f2937; /* Darker background for night mode */
+}
+
+footer .text-gray-500.dark\:text-gray-400 {
+    color: #d1d5db; /* Lighter gray for night mode */
+}
+
+footer .flex a.dark\:text-gray-400 {
+    background-color: #374151; /* Dark background for links in night mode */
+    color: #d1d5db; /* Lighter color for links in night mode */
+}
+
+footer .flex a.dark\:text-gray-400:hover {
+    background-color: #4b5563; /* Slightly darker background on hover in night mode */
+    color: #60a5fa; /* Light blue color on hover in night mode */
+}
+
+footer .container.mx-auto.px-6.py-2.text-center.dark\:text-gray-400 span {
+    color: #9ca3af; /* Lighter gray for version text in night mode */
+}
+
+/* Media Queries */
+@media (max-width: 640px) {
+    footer .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer .flex {
+        flex-direction: column;
+        gap: 8px;
+    }
+}

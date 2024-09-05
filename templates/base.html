@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roomapp</title>
 
+
     <script src="https://kit.fontawesome.com/187b847ba0.js" crossorigin="anonymous"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <link rel="icon" href="{% static 'lanimg/Roomapp.png' %}">
     <link rel="stylesheet" href="{% static 'lancss/styles.css' %}">
     <link rel="stylesheet" href="{% static 'lancss/footer.css' %}">
     <script src="{% static 'lanjs/scripts.js' %}"></script>
@@ -103,9 +103,6 @@
                 <a href="{% url 'about' %}" class="text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">
                     What is Roomapp <i class="fa-regular fa-circle-question"></i>
                 </a>
-                <a href="#" class="text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500" id="friendBtn">
-                    Show to Friend <i class="fa-solid fa-user-group friend"></i>
-                </a>
                 <div class="relative">
                     <button id="support-button" class="text-gray-900 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-500">Support <i class="fa fa-caret-down"></i></button>
                     <div id="support-dropdown" class="absolute hidden bg-white dark:bg-gray-800 shadow-md mt-2 py-2 w-48">
@@ -130,12 +127,6 @@
 
 
     <main class="container mx-auto mt-5 px-6">
-        <div id="overlay" class="overlay">
-            <div class="overlay-content">
-                <img src="{% static 'lanimg/RoomappQR.png' %}" alt="Image">
-                <span class="close-btn" id="closeBtn"><i class="fa-solid fa-xmark text-4xl close-btn-2"></i></span>
-            </div>
-        </div>
 
         {% block content %}
         {% endblock content %}
@@ -175,13 +166,7 @@
                 supportDropdown.classList.add('hidden');
             }
         });
-        document.getElementById('friendBtn').addEventListener('click', function() {
-        document.getElementById('overlay').style.display = 'flex';
-        });
-        
-        document.getElementById('closeBtn').addEventListener('click', function() {
-            document.getElementById('overlay').style.display = 'none';
-        });
+
 
     document.getElementById('menu-toggle').addEventListener('click', function() {
       var mobileMenu = document.getElementById('mobile-menu');
