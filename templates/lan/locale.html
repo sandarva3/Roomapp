@@ -10,6 +10,7 @@
         const latest = "{{ latest|escapejs }}";
         const fileURL = "{% url 'lanfiles' %}";
         const removeAll_Url = "{% url 'removeAll' %}";
+        const largeFileURL = "{% url 'largeFiles' %}";
 
         let fileids = [];
         "{% for file in files %}"

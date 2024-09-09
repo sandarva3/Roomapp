@@ -57,19 +57,21 @@ def delFile_view(request, id):
     file.delete()
     return redirect('lan')
 
+
+
 @csrf_exempt
-def files_view(request):
+def largeFiles_view(request):
     if request.method == "POST":
         try:
             file_name = request.POST.get("filename")
             file_name = os.path.basename(file_name)
             file_name = re.sub(r'[<>:"/\\|?*]', '', file_name)  # Sanitize the file name
-            print(f"Sanitized filename: {file_name}")
+            print(f"RECEIVED LARGE FILE: {file_name}")
 
             chunk_index = int(request.POST.get("chunkIndex"))
             total_chunks = int(request.POST.get("totalChunks"))
             ipAddress = request.POST.get('ipAddress')
-            chunk_file = request.FILES["chunk_file"]
+            chunk_file = request.FILES["chunkFile"]
 
             # Create a directory for storing the chunks
             upload_dir = os.path.join(settings.MEDIA_ROOT, "uploads", file_name)
@@ -148,9 +150,14 @@ def Assemble(file_name, total_chunks, upload_dir, ipAddress):
         # Optionally remove the upload directory if all chunks are deleted
         try:
             os.rmdir(upload_dir)
+            os.remove(final_path)
+            print("THE ASSEMBLED FILE IS DELETED(Not the one which is saved for database)")
         except Exception as e:
             print(f"Error deleting upload directory: {e}")
-'''
+
+
+
+
 def files_view(request):
     if request.method == "POST":
         try:
@@ -159,7 +166,7 @@ def files_view(request):
             current_time = int(time.time())
             for f in files:
                 Lanfiles.objects.create(file=f, Funix_time=current_time, Faddress=address)
-                print(f"FILE: {f}")
+                print(f" RECEIVED SMALL FILE: {f}")
                 print(f"THE ADDRESS ALONG WITH FILE: {address}")
             context = {
                 'status':1,
@@ -169,7 +176,7 @@ def files_view(request):
         except Exception as e:
             print(f"An ERROR occured while user upload files: {e}")
             return HttpResponse("SOMETHING Went Wrong. Probably Due to slow network. Please Try again.")
-'''
+
 
 def async_view(request):
     if request.method == "POST":
