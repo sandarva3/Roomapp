@@ -8,7 +8,8 @@ import time
 from datetime import datetime
 import os
 from django.conf import settings
-from django.core.files import File
+from django.core.files.base import File as DjangoFile
+import re
 
 def lanAjax_view(request):
     if request.method == "POST":
@@ -23,7 +24,7 @@ def lanAjax_view(request):
             context = {
                 'response': 'Data received successfully',
                 'filename':file.file.name[9:],
-                'file':fileurl
+                'file':fileurl,
             }
             return JsonResponse(context)
         except Exception as e:
@@ -60,68 +61,95 @@ def delFile_view(request, id):
 def files_view(request):
     if request.method == "POST":
         try:
-            file_name = request.POST.get('filename')
-            chunk_index = int(request.POST.get('chunkIndex'))
-            total_chunks = int(request.POST.get('totalChunks'))
+            file_name = request.POST.get("filename")
+            file_name = os.path.basename(file_name)
+            file_name = re.sub(r'[<>:"/\\|?*]', '', file_name)  # Sanitize the file name
+            print(f"Sanitized filename: {file_name}")
+
+            chunk_index = int(request.POST.get("chunkIndex"))
+            total_chunks = int(request.POST.get("totalChunks"))
             ipAddress = request.POST.get('ipAddress')
-            chunk_file = request.FILES['chunk_file']
-        
+            chunk_file = request.FILES["chunk_file"]
+
             # Create a directory for storing the chunks
-            upload_dir = os.path.join('media/uploads', file_name)
+            upload_dir = os.path.join(settings.MEDIA_ROOT, "uploads", file_name)
+            print(f"Upload directory: {upload_dir}")
             if not os.path.exists(upload_dir):
                 os.makedirs(upload_dir)
-            
+
             # Save each chunk in its respective file (chunk_0, chunk_1, etc.)
-            chunk_file_path = os.path.join(upload_dir, f'chunk_{chunk_index}')
+            chunk_file_path = os.path.join(upload_dir, f"chunk_{chunk_index}")
+            print(f"Chunk file path: {chunk_file_path}")
             with open(chunk_file_path, 'wb+') as destination:
                 for chunk_data in chunk_file.chunks():
                     destination.write(chunk_data)
 
             # Count the number of chunks that have been uploaded
-            received_chunks = len([name for name in os.listdir(upload_dir) if name.startswith('chunk_')])
-            #it appends name in array and len() calculates total number of names(or chunks here).
-            #IT does the same thing:
-            ''' 
-            all_items = os.listdir(upload_dir)
-            filtered_items = []
-            for name in all_items:
-                if name.startswith('chunk_'):
-                    filtered_items.append(name)
-            received_chunks = len(filtered_items)
-            '''
+            received_chunks = len([name for name in os.listdir(upload_dir) if name.startswith("chunk_")])
+            print(f"Received chunks: {received_chunks}")
 
             # If all chunks are uploaded, assemble the file and save it to the database
             if received_chunks == total_chunks:
-                Assemble(file_name, total_chunks, upload_dir, ipAddress)
-            
+                lock_file_path = os.path.join(upload_dir, "assembly.lock")
+                # Check if assembly is already happening
+                if not os.path.exists(lock_file_path):
+                    # Create a lock file to prevent simultaneous assemblies
+                    open(lock_file_path, 'w').close()
+                    Assemble(file_name, total_chunks, upload_dir, ipAddress)
+
             return JsonResponse({'status': 'success', 'chunkIndex': chunk_index})
-        
+
         except Exception as e:
             print(f"Error during File Upload: {e}")
-            return HttpResponse("ERROR DURING FILE UPLOAD", status = 500)
+            return HttpResponse("ERROR DURING FILE UPLOAD", status=500)
     else:
-        return HttpResponse("INVALID REQUEST METHOD.", status = 405)
+        return HttpResponse("INVALID REQUEST METHOD.", status=405)
 
 
 def Assemble(file_name, total_chunks, upload_dir, ipAddress):
-    # Path to store the final assembled file
     current_time = int(time.time())
-    final_path = os.path.join('media/lanmedia', file_name)
-    with open(final_path, 'wb') as final_file:
+    final_dir = os.path.join(settings.MEDIA_ROOT, "lanmedia")
+    final_path = os.path.join(final_dir, file_name)
+    print(f"Final path: {final_path}")
+
+    try:
+        # Assemble the file from the chunks
+        with open(final_path, 'wb') as final_file:
+            for chunk_index in range(total_chunks):
+                chunk_file_path = os.path.join(upload_dir, f"chunk_{chunk_index}")
+                print(f"Assembling chunk file path: {chunk_file_path}")
+                with open(chunk_file_path, 'rb') as chunk:
+                    final_file.write(chunk.read())
+
+        # Save the assembled file in the database
+        try:
+            with open(final_path, 'rb') as f:
+                django_file = DjangoFile(f, name=file_name)  # Wrap the file with a name
+                print(f"Saving file to database: {final_path}")
+                Lanfiles.objects.create(file=django_file, Funix_time=current_time, Faddress=ipAddress)
+                print(f"File assembled and saved: {file_name} from IP: {ipAddress}")
+        except Exception as e:
+            print(f"FILE NOT SAVED TO DATABASE, DUE TO: {e}")
+
+        # Delete the chunks after the full file is assembled
+        print(f"THe total chunk is: {total_chunks}")
         for chunk_index in range(total_chunks):
-            chunk_file_path = os.path.join(upload_dir, f'chunk_{chunk_index}')
-            with open(chunk_file_path, 'rb') as chunk:
-                final_file.write(chunk.read())
-    #save the assembled file in db
-    with open(final_path, 'rb') as f:
-        file = File(f)
-        Lanfiles.objects.create(file=file, Funix_time=current_time, Faddress=ipAddress)
+            print(f"Deleting chunk : {chunk_index}")
+            chunk_file_path = os.path.join(upload_dir, f"chunk_{chunk_index}")
+            os.remove(chunk_file_path)
 
-    for chunk_index in range(total_chunks):
-        chunk_file_path = os.path.join(upload_dir, f'chunk_{chunk_index}')
-        os.remove(chunk_file_path)
+    finally:
+        # Remove the lock file after assembly is completed
+        lock_file_path = os.path.join(upload_dir, "assembly.lock")
+        if os.path.exists(lock_file_path):
+            os.remove(lock_file_path)
 
-
+        
+        # Optionally remove the upload directory if all chunks are deleted
+        try:
+            os.rmdir(upload_dir)
+        except Exception as e:
+            print(f"Error deleting upload directory: {e}")
 '''
 def files_view(request):
     if request.method == "POST":

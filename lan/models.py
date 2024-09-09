@@ -11,7 +11,7 @@ class Text(models.Model):
         
 
 class Lanfiles(models.Model):
-    file = models.FileField(upload_to='lanmedia', null=True)
+    file = models.FileField(upload_to="lanmedia", null=True)
     uploaded_at = models.DateTimeField(auto_now_add=True, null=True)
     Funix_time = models.IntegerField(default=60)
     Faddress = models.GenericIPAddressField(protocol='both', unpack_ipv4=False, default='27.34.64.148')

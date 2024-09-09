@@ -121,12 +121,12 @@ USE_TZ = True
 
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # This points to lan/static
+    os.path.join(BASE_DIR, "static"),  # This points to lan/static
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # This is where collectstatic will place all static files
-STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # This is where collectstatic will place all static files
+STATIC_URL = "/static/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
