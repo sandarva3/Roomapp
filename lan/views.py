@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from .models import Text, Lanfiles
+from .models import Text, Lanfiles, FilesHistory
 from pytz import timezone
 import time
 from datetime import datetime
@@ -129,6 +129,7 @@ def Assemble(file_name, total_chunks, upload_dir, ipAddress):
                 django_file = DjangoFile(f, name=file_name)  # Wrap the file with a name
                 print(f"Saving file to database: {final_path}")
                 Lanfiles.objects.create(file=django_file, Funix_time=current_time, Faddress=ipAddress)
+                FilesHistory.objects.create(file_name=django_file.name, Faddress=ipAddress)
                 print(f"File assembled and saved: {file_name} from IP: {ipAddress}")
         except Exception as e:
             print(f"FILE NOT SAVED TO DATABASE, DUE TO: {e}")
@@ -166,6 +167,7 @@ def files_view(request):
             current_time = int(time.time())
             for f in files:
                 Lanfiles.objects.create(file=f, Funix_time=current_time, Faddress=address)
+                FilesHistory.objects.create(file_name=f.name, Faddress=address)
                 print(f" RECEIVED SMALL FILE: {f}")
                 print(f"THE ADDRESS ALONG WITH FILE: {address}")
             context = {

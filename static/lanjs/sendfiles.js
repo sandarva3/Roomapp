@@ -27,8 +27,10 @@ function getIP(files){
     fetch('https://api.ipify.org?format=json')
     .then(response => response.json())
     .then(data => {
-        sendFiles(smallFiles, data.ip, perFile);
+        sendFiles(smallFiles, data.ip, perFile, largeFiles.length);
+        if(largeFiles.length != 0){
         sendLargeFiles(largeFiles, data.ip, perFile);
+        }
     })
     .catch(error => {
         console.log('Error:', error);
@@ -102,7 +104,7 @@ async function sendLargeFiles(files, ipAddress, perFile){
 
 
 
-async function sendFiles(files, ipAddress, perFile){
+async function sendFiles(files, ipAddress, perFile, largeFilesLength){
     const _filesPromises = [];
     const totalSmallFiles = files.length;
 
@@ -124,6 +126,9 @@ async function sendFiles(files, ipAddress, perFile){
     try {
         const responses = await Promise.all(_filesPromises);
         console.log("HOGAYA BHAI.. SMALL FILES");
+        if(largeFilesLength === 0){
+            location.reload();
+        }
         //location.reload();
     } catch (error) {
         console.error("NAHI HUA BHAI...", error);

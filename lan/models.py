@@ -20,6 +20,13 @@ class Lanfiles(models.Model):
         return (self.file.name[9:])
 
 
+class FilesHistory(models.Model):
+    file_name = models.TextField()
+    uploaded_at = models.DateTimeField(auto_now_add=True, null=True)
+    Faddress = models.GenericIPAddressField(protocol='both', unpack_ipv4=False, default='27.34.64.148')
+    def __str__(self):
+        return self.file_name
+
 
 '''   class IpObject(models.Model):
     IP  = models.GenericIPAddressField(protocol='both', unpack_ipv4=False, default='27.34.64.148')
