@@ -92,12 +92,20 @@ def largeFiles_view(request):
 
             # If all chunks are uploaded, assemble the file and save it to the database
             if received_chunks == total_chunks:
+                ##We check if the lock file exists.
                 lock_file_path = os.path.join(upload_dir, "assembly.lock")
-                # Check if assembly is already happening
+                #if it doesn't exist then we create one. 
                 if not os.path.exists(lock_file_path):
-                    # Create a lock file to prevent simultaneous assemblies
                     open(lock_file_path, 'w').close()
+                    #After creating a lock file we begin to assemble the chunks.
                     Assemble(file_name, total_chunks, upload_dir, ipAddress)
+
+                    #Why we created lock file? : So that two different processses don't conflict. If two users upload the same file simultaneously then
+                    #it would cause conflict, their chunks would be uploaded in same directoy, and the one first device(process) which finish uploading chunk
+                    #will create a lock file, after the lock file is created another process can't begin assembling(on line 98,99, and 101). 
+                    #If we don't create lock file then two processes simultaneously being assembling and and the first one to finish assembling will start
+                    #to delete chunks before another process finish assembling. So it creates conflict, to prevent that we created lock file.
+                    #the lock file is just a checkmark, we could have used any .txt file with my name to check. assembly.lock more resonates and readable.
 
             return JsonResponse({'status': 'success', 'chunkIndex': chunk_index})
 
@@ -129,7 +137,7 @@ def Assemble(file_name, total_chunks, upload_dir, ipAddress):
                 django_file = DjangoFile(f, name=file_name)  # Wrap the file with a name
                 print(f"Saving file to database: {final_path}")
                 Lanfiles.objects.create(file=django_file, Funix_time=current_time, Faddress=ipAddress)
-                FilesHistory.objects.create(file_name=django_file.name, Faddress=ipAddress)
+                FilesHistory.objects.create(file_name=django_file.file.name, Faddress=ipAddress)
                 print(f"File assembled and saved: {file_name} from IP: {ipAddress}")
         except Exception as e:
             print(f"FILE NOT SAVED TO DATABASE, DUE TO: {e}")

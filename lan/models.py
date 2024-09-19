@@ -18,7 +18,7 @@ class Lanfiles(models.Model):
 
     def __str__(self):
         return (self.file.name[9:])
-
+        
 
 class FilesHistory(models.Model):
     file_name = models.TextField()

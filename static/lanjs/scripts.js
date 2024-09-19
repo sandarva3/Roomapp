@@ -5,6 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const lightSwitches = document.querySelectorAll('.toggle-checkbox');
+            if (! localStorage.getItem('dark-mode')) {
+                localStorage.setItem('dark-mode', 'true');
+                lightSwitches.forEach(lightSwitch => lightSwitch.checked = true);
+                document.documentElement.classList.add('dark');
+                document.getElementById('darkSwitch').classList.add('translate-x-full', 'bg-green-500');
+            }
             if (localStorage.getItem('dark-mode') === 'true') {
                 lightSwitches.forEach(lightSwitch => lightSwitch.checked = true);
                 document.documentElement.classList.add('dark');
