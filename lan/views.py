@@ -40,9 +40,10 @@ def faq_view(request):
 def removeAllFiles_view(request):
     if (request.method == "POST"):
         data = json.loads(request.body)
-        IP = data['ip']
+        IP = data['ip'] 
         files = Lanfiles.objects.filter(Faddress=IP)
         for file in files:
+            FilesHistory.objects.create(file_name = f"Deleted: {file}", Faddress=IP)
             file.delete()
 
         return JsonResponse(1, safe=False)
@@ -54,6 +55,7 @@ def about_view(request):
 
 def delFile_view(request, id):
     file = Lanfiles.objects.get(id=id)
+    FilesHistory.objects.create(file_name=f"Deleted: {file}", Faddress=file.Faddress)
     file.delete()
     return redirect('lan')
 
@@ -137,7 +139,7 @@ def Assemble(file_name, total_chunks, upload_dir, ipAddress):
                 django_file = DjangoFile(f, name=file_name)  # Wrap the file with a name
                 print(f"Saving file to database: {final_path}")
                 Lanfiles.objects.create(file=django_file, Funix_time=current_time, Faddress=ipAddress)
-                FilesHistory.objects.create(file_name=django_file.file.name, Faddress=ipAddress)
+                FilesHistory.objects.create(file_name= f"Uploaded: {django_file.file.name}", Faddress=ipAddress)
                 print(f"File assembled and saved: {file_name} from IP: {ipAddress}")
         except Exception as e:
             print(f"FILE NOT SAVED TO DATABASE, DUE TO: {e}")
@@ -175,7 +177,7 @@ def files_view(request):
             current_time = int(time.time())
             for f in files:
                 Lanfiles.objects.create(file=f, Funix_time=current_time, Faddress=address)
-                FilesHistory.objects.create(file_name=f.name, Faddress=address)
+                FilesHistory.objects.create(file_name=f"Uploaded: {f.name}", Faddress=address)
                 print(f" RECEIVED SMALL FILE: {f}")
                 print(f"THE ADDRESS ALONG WITH FILE: {address}")
             context = {

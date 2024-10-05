@@ -22,7 +22,7 @@ class Lanfiles(models.Model):
 
 class FilesHistory(models.Model):
     file_name = models.TextField()
-    uploaded_at = models.DateTimeField(auto_now_add=True, null=True)
+    Triggered_at = models.DateTimeField(auto_now_add=True, null=True)
     Faddress = models.GenericIPAddressField(protocol='both', unpack_ipv4=False, default='27.34.64.148')
     def __str__(self):
         return self.file_name
