@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
 });
 
 
-
 console.log("FILES IN AREAA AAA");
 
 let fileinput = document.getElementById('fileinput');
