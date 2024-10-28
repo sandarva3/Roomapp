@@ -44,12 +44,12 @@ menuToggle.addEventListener('click', () => {
     
     
 //TypeWriting Logic
-const textBox = document.getElementById('textBox3');
 function typeWriter(text, callback) {
-let i = 0;
-textBox.placeholder = ''; // Clear placeholder before typing
-
-function type() {
+    const textBox = document.getElementById('textBox3');
+    let i = 0;
+    textBox.placeholder = ''; // Clear placeholder before typing
+    
+    function type() {
         if (i < text.length) {
             textBox.placeholder += text.charAt(i);
             i++;
@@ -64,6 +64,7 @@ function type() {
 
 
 function goBack(callback) {
+    const textBox = document.getElementById('textBox3');
     let i = textBox.placeholder.length;
     
     function back() {
@@ -98,7 +99,6 @@ function processTexts(index) {
     }
 };
 processTexts(0);
-
 
 
 //Reload Page on click of Reload Button
