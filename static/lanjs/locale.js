@@ -1,12 +1,14 @@
 document.addEventListener("DOMContentLoaded", ()=> {
     console.log("LOCALE");
-
+    const copyTextBtn = document.getElementById('copyTextBtn');
+    copyTextBtn.style.display = "none";
     //WHEN CHANGES ARE MADE IN TEXTAREA
     let textBox = document.getElementById('textBox3');
     console.log("TEXTBOX FOUND:", textBox.value);
     const debouncedCheckIP = debounce(checkIP, 650);
-
     textBox.addEventListener("input", function(){
+        document.getElementById('startTyping3').style.display = "none";
+        copyTextBtn.style.display = "inline";
         console.log("Textbox Triggered");
         document.getElementById('spinning').style.display = "inline-block";
         document.getElementById('done').style.display = "none";

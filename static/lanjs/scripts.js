@@ -44,9 +44,9 @@ menuToggle.addEventListener('click', () => {
     
     
 //TypeWriting Logic
+const textBox = document.getElementById('textBox3');
 function typeWriter(text, callback) {
 let i = 0;
-const textBox = document.getElementById('textBox3');
 textBox.placeholder = ''; // Clear placeholder before typing
 
 function type() {
@@ -62,8 +62,8 @@ function type() {
     type();
 };
 
+
 function goBack(callback) {
-    const textBox = document.getElementById('textBox3');
     let i = textBox.placeholder.length;
     
     function back() {
@@ -98,6 +98,7 @@ function processTexts(index) {
     }
 };
 processTexts(0);
+
 
 
 //Reload Page on click of Reload Button

@@ -235,21 +235,25 @@ def lan_view(request):
     except:
         pass
     if ipAd != None:
+        latest = ""
+        filesurl = []
         try:
-            latest = Text.objects.filter(Taddress=ipAd).latest('created_at')
+            latest = Text.objects.filter(Taddress=ipAd).latest('created_at').texts
+        except:
+            pass
+        try:
             files = Lanfiles.objects.filter(Faddress=ipAd).all()
-            filesurl = []
+            print(f"The files are: {files}")
             for file in  files:
                 file_url = request.build_absolute_uri(file.file.url)
                 filesurl.append({'id':file.id, 'name': file, 'url':file_url})
-            context = {
-                'files': filesurl,
-                'latest': latest.texts,
-            }
-            #print(f"IP ADDRESS second TIME: {ipAd}")
-            return render(request, 'lan/locale.html', context)
+                print(f"The ID of file {file} is: {file.id}")
         except Exception as e:
-            print(f"Error in getting details: {e}")
-            return render(request, 'lan/locale.html')
+            print(f"Error in getting files: {e}")
+        context = {
+            'files': filesurl,
+            'latest': latest,
+            }
+        return render(request, 'lan/locale.html', context)
     else:
         return redirect('first')

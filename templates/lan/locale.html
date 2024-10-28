@@ -62,7 +62,11 @@
 
         <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
             <div>
-                <button class="px-1 py-1 bg-gray-500 text-white rounded mb-2 mt-0 copyBtn" style="font-family: 'Courier';">
+                <span id="startTyping3" class="startTyping">
+                    Start Typing
+                    <i class="fa-solid fa-check fa-beat typingTick" style="color: #2ec723;"></i>
+                </span>
+                <button id="copyTextBtn" class="px-1 py-1 bg-gray-500 text-white rounded mb-2 mt-0 copyBtn" style="font-family: 'Courier';">
                     <i class="fa-regular fa-copy"></i>
                     <span id="copyText">
                         Copy text
@@ -116,6 +120,7 @@
                             </p>
                     {% else %}
                     {% for file in files %}
+                    <script>console.log("This is file");</script>
                     <div class="file3">
                         <li class="eachFileRow flex justify-between items-center">
                             <a class="eachFile" href="#" onclick="sendReq('{{file.id}}')">
