@@ -1,4 +1,4 @@
-##Roomapp
+# Roomapp
 
 WE MAKE SHARING VERY SEAMLESS. 
 If you type something in the text box or upload some files in your Room, then you can access those files and text from any devices connected in the same wifi. 
@@ -11,7 +11,7 @@ You can share files and synchronize text very seamlessly on that Room, users not
 
 
 
-#Features:
+##Features:
 	- Share Anything: Any text paragraphs, codes, and any file of any size can be shared very fast(even Movies).
         - Very secure: People connected to other wifi networks can't access your files.
         - Convinience: A very easy to share anything with nearby people.
