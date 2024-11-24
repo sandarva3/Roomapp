@@ -13,6 +13,6 @@ You can share files and synchronize text very seamlessly on that Room, users not
 
 ## Features:
 
-	- Share Anything: Any text paragraphs, codes, and any file of any size can be shared very fast(even Movies).
-        - Very secure: People connected to other wifi networks can't access your files.
-        - Convinience: A very easy to share anything with nearby people.
+	- ** Share Anything:** Any text paragraphs, codes, and any file of any size can be shared very fast(even Movies).
+        - **Very secure:** People connected to other wifi networks can't access your files.
+        - **Convinience:** A very easy to share anything with nearby people.
