@@ -2,7 +2,7 @@
 
 **Effortless Sharing Across Devices**  
 
-Roomapp makes sharing seamless. Connect multiple devices on the same Wi-Fi and easily exchange files, text, or code without hassle. Whether it's a quick file transfer in a computer lab or sharing a movie, Roomapp ensures secure, fast, and convenient sharing.  
+Roomapp makes sharing seamless. Connect multiple devices on the same Wi-Fi and easily exchange files, text, or code without hassle. It was made to make sharing very easy with nearby people. It also supports sharing large files like movies very fast.
 
 ---
 
